@@ -1,7 +1,7 @@
 {
   "name": "dataviz-components",
   "version": "0.0.1",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
