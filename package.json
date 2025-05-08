@@ -1,7 +1,35 @@
 {
   "name": "dataviz-components",
+  "description": "A simple React component library.",
   "version": "0.0.1",
-  "main": "./src/index.ts",
+  "keywords": [
+    "react",
+    "typescript",
+    "component",
+    "library",
+    "dataviz",
+    "echarts"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamdigitale/dataviz-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/teamdigitale/dataviz-components/issues"
+  },
+  "homepage": "https://github.com/teamdigitale/dataviz-components#readme"
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepublishOnly": "npm run build"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -11,18 +39,15 @@
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.3",
     "file-saver": "^2.0.5",
-    "react": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-error-boundary": "^5.0.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "rollup": "^4.35.0",
     "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
     "typescript": "^5.8.2"
-  },
-  "description": "",
-  "keywords": [],
-  "license": "MIT",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
