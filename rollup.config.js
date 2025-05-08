@@ -2,12 +2,10 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-// import { terser } from "rollup-plugin-terser";
-
 // import dts from "rollup-plugin-dts";
 
 // const packageJson = require("./package.json");
-import packageJson from "./package.json";
+import packageJson from "./package.json" assert { type: "json" };
 
 export default [
   {
@@ -32,7 +30,6 @@ export default [
         tsconfig: "./tsconfig.json",
         exclude: ["**/__tests__/**", "**/*.test.tsx", "**/*.stories.tsx"], // Exclude test files
       }),
-      // terser(), // Minifies the bundle (use only for production builds if needed)
     ],
   },
   // {

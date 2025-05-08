@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import type { EChartsType } from "echarts";
 import React from "react";
 import dayjs from "dayjs";
-import { FieldDataType } from "../sharedTypes";
+import { FieldDataType } from "../types";
 
 type RenderProps = FieldDataType & {
   fullH: boolean;

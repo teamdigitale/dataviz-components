@@ -145,6 +145,7 @@ export default function ChartWrapper(props: any) {
                 data={getPieValues(data)}
                 setEchartInstance={setEchartInstance}
                 isMobile={isMobile}
+                isFullH={false}
               />
             )}
             {chartType === "map" && (

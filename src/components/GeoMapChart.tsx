@@ -2,7 +2,7 @@ import React from "react";
 import ReactEcharts from "echarts-for-react";
 import { useRef, useEffect, useState } from "react";
 import { formatTooltip } from "../lib/utils";
-import { ChartPropsType, FieldDataType } from "../sharedTypes";
+import { ChartPropsType, FieldDataType } from "../types";
 import { ErrorBoundary } from "react-error-boundary";
 import * as echarts from "echarts";
 
