@@ -90,7 +90,7 @@ export const fixedSettings = {
 };
 
 export const defaultConfig = {
-  colors: [...palettes.divergente],
+  colors: [...(palettes as any).divergente],
   palette: "divergente",
   direction: "vertical",
   h: 350,
