@@ -8,6 +8,7 @@ import DataTable from "./DataTable";
 import GeoMapChart from "./GeoMapChart";
 import PieChart from "./PieChart";
 
+
 export default function ChartWrapper(props: any) {
   const { data, info } = props;
 

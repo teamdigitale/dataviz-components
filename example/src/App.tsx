@@ -119,9 +119,10 @@ function App() {
         fullH={false}
         getPicture={() => console.log("getPicture")}
       />
-      <pre>
+      {/* <pre>
         <small>{JSON.stringify(sampleData.id, null, 2)}</small>
-      </pre>
+      </pre> */}
+      {/* <DataTable data={sampleData.data} /> */}
     </div>
   );
 }
