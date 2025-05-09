@@ -1,4 +1,3 @@
-import { palettes } from "./constants";
 import { ChartConfigType } from "../types";
 
 export function isNumeric(s: string) {
@@ -16,7 +15,7 @@ export function isEqual(a: object, b: object) {
 }
 
 // function to get available palettes based on number of series + defaults
-export function getAvailablePalettes(numSeries: number) {
+export function getAvailablePalettes(numSeries: number, palettes: object) {
   const keys = Object.keys(palettes);
   const availabelPalettes = [
     ...keys.slice(1, 7),
@@ -27,7 +26,7 @@ export function getAvailablePalettes(numSeries: number) {
 }
 
 // function to get palette colors for map type, adds default colors
-export function getMapPalettes() {
+export function getMapPalettes(palettes: object) {
   const keys = Object.keys(palettes);
   const availabelPalettes = [
     ...keys.filter((k) => k.indexOf(`_${2}_`) > -1),
@@ -37,7 +36,7 @@ export function getMapPalettes() {
 }
 
 // function to get palette colors by name
-export function getPalette(palette: any) {
+export function getPalette(palette: string, palettes: object) {
   return (palettes as any)[palette];
 }
 

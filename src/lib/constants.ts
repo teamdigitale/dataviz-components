@@ -1,7 +1,7 @@
 import type { FieldDataType } from "../types";
 import { generateGradient, hexToHsla } from "./utils";
 
-export const palettes: any = {
+export const palettes: object = {
   divergente: [
     "#003366",
     "#004D99",
