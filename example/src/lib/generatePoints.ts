@@ -1,3 +1,4 @@
+import type { PointData } from "dataviz-components";
 // Approximate Bounding Boxes
 // const ITALY_BOUNDS = {
 //   minLon: 6.6,
@@ -5,7 +6,6 @@
 //   minLat: 35.5,
 //   maxLat: 47.1,
 // };
-
 const ITALY_BOUNDS = {
   minLon: 8.6,
   maxLon: 16.5,
