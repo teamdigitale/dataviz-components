@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import ReactEcharts, { EChartsOption } from "echarts-for-react";
 import { ChartPropsType, FieldDataType } from "../types";
 import { formatTooltip } from "../lib/utils";
@@ -11,8 +11,14 @@ function BasicChart({
   isFullH = false,
 }: ChartPropsType) {
   const refCanvas = useRef<ReactEcharts>(null);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    if (refCanvas.current) {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+  }, []);
+  useEffect(() => {
+    if (loaded && refCanvas.current) {
       try {
         const echartInstance = refCanvas.current.getEchartsInstance();
         if (setEchartInstance) {
@@ -22,7 +28,7 @@ function BasicChart({
         console.log(error);
       }
     }
-  }, [refCanvas.current]);
+  }, [loaded, refCanvas.current]);
   function getOptions(data: FieldDataType) {
     const config: any = data.config;
     const responsive: boolean =

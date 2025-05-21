@@ -13,11 +13,12 @@ function GeoMapChart({
   isMobile = false,
   isFullH = false,
 }: ChartPropsType) {
-  const refCanvas = useRef(null);
+  const refCanvas = useRef<ReactEcharts>(null);
   const [error, setError] = useState("");
   const [geoData, setGeoData] = useState(null);
   const [options, setOptions] = useState(null);
   const [weDoNotHaveInstance, setWeDoNotHaveInstance] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   function getOptions(data: FieldDataType, geoData: any) {
     echarts.registerMap(id as string, geoData);
@@ -142,12 +143,23 @@ function GeoMapChart({
   }, [geoData]);
 
   useEffect(() => {
-    if (refCanvas?.current && weDoNotHaveInstance) {
-      const echartInstance = (refCanvas.current as any).getEchartsInstance();
-      setEchartInstance(echartInstance);
-      setWeDoNotHaveInstance(false);
+    setTimeout(() => {
+      setLoaded(true);
+    }, 2000);
+  }, []);
+  useEffect(() => {
+    if (loaded && refCanvas.current && weDoNotHaveInstance) {
+      try {
+        const echartInstance = refCanvas.current.getEchartsInstance();
+        if (setEchartInstance) {
+          setEchartInstance(echartInstance);
+          setWeDoNotHaveInstance(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [refCanvas.current, weDoNotHaveInstance]);
+  }, [loaded, refCanvas.current, weDoNotHaveInstance]);
 
   const chartHeight = data.config?.h || "500px";
 
@@ -166,7 +178,6 @@ function GeoMapChart({
               height: isFullH ? "100%" : chartHeight,
               minHeight: isFullH ? "100%" : chartHeight,
               maxHeight: "100%",
-
               width: "100%",
               maxWidth: "100%",
             }}

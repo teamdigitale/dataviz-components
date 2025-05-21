@@ -23,3 +23,30 @@ check the `exxample app`
 ## Deps
 
 you have to add peerDeps to you projects.
+
+# How To Dev
+
+to add deps use `npm` please and add each required lib as dev and peer deps like:
+
+```zsh
+npm i --save-dev ol
+npm i --save-peer ol
+```
+
+to update the build
+
+```zsh
+npm run build
+```
+
+than bump the version and push to npm
+
+```zsh
+npm publish
+```
+
+than install the last version inside example project
+
+```zsh
+npm add dataviz-components@latest
+```

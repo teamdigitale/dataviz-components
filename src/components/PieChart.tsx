@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ReactEcharts, { EChartsOption } from "echarts-for-react";
 import { ChartPropsType, FieldDataType } from "../types";
 import { formatTooltip } from "../lib/utils";
@@ -10,12 +10,17 @@ function PieChart({
   isMobile = false,
   isFullH = false,
 }: ChartPropsType) {
-  const refCanvas = useRef(null);
-
+  const refCanvas = useRef<ReactEcharts>(null);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    if (refCanvas.current) {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+  }, []);
+  useEffect(() => {
+    if (loaded && refCanvas.current) {
       try {
-        const echartInstance = (refCanvas.current as any).getEchartsInstance();
+        const echartInstance = refCanvas.current.getEchartsInstance();
         if (setEchartInstance) {
           setEchartInstance(echartInstance);
         }
@@ -23,7 +28,7 @@ function PieChart({
         console.log(error);
       }
     }
-  }, [refCanvas.current]);
+  }, [loaded, refCanvas.current]);
 
   function getTotal(data: any) {
     return data.reduce((acc: number, v: any) => {

@@ -103,3 +103,11 @@ export interface RemoteStoreStateType {
   updateItem: (item: FieldDataType) => void;
   setList: (items: FieldDataType[]) => void;
 }
+
+export interface PointData {
+  id: number;
+  name: string;
+  lon: number;
+  lat: number;
+  region?: string; // Optional region for context
+}

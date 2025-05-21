@@ -1,7 +1,7 @@
 {
   "name": "dataviz-components",
   "description": "A simple React component library.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "react",
     "typescript",
@@ -39,6 +39,7 @@
     "dayjs": "*",
     "echarts": "*",
     "echarts-for-react": "*",
+    "ol": "*",
     "react": "*",
     "react-dom": "*",
     "react-error-boundary": "*",
@@ -53,6 +54,7 @@
     "dayjs": "^1.11.13",
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
+    "ol": "^10.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-error-boundary": "^6.0.0",
