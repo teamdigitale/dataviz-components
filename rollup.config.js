@@ -24,7 +24,11 @@ export default [
       },
     ],
     plugins: [
-      css(), // Handles CSS imports
+      css({
+        minimize: true,
+        extensions: [".css"],
+        extract: "dist/dataviz.css",
+      }), // Handles CSS imports
       peerDepsExternal(), // Excludes peer dependencies from the bundle
       resolve(), // Resolves node modules
       commonjs(), // Converts CommonJS modules to ES6

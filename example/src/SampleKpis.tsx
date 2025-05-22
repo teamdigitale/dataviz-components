@@ -1,17 +1,29 @@
-import { useState } from "react";
-import { RenderChart, KpiGroup, type KpiItemType } from "dataviz-components";
+import { KpiGroup, type FieldDataType } from "dataviz-components";
 import { generateFakeKpis } from "./lib/utils";
 
 function App() {
-  const [data] = useState<KpiItemType[]>(() => generateFakeKpis(10));
-  console.log("RenderChart", RenderChart);
-  return (
-    <KpiGroup
-      data={data}
-      config={{ direction: "horizontal" }}
-      id='kpi-group1'
-    />
-  );
+  const data: FieldDataType = {
+    id: "kpi-group1",
+    dataSource: generateFakeKpis(10),
+    chart: "kpi",
+    config: {
+      direction: "horizontal",
+      h: 0,
+      labeLine: false,
+      legend: false,
+      legendPosition: "",
+      palette: [],
+      tooltip: false,
+      tooltipFormatter: "",
+      valueFormatter: "",
+      totalLabel: "",
+      tooltipTrigger: "",
+      colors: [],
+    },
+    data: null,
+  };
+
+  return <KpiGroup data={data} />;
 }
 
 export default App;

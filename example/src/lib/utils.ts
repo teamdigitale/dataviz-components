@@ -1,6 +1,6 @@
 import type { KpiItemType } from "dataviz-components";
 
-export  function getRandomInRange(
+export function getRandomInRange(
   min: number,
   max: number,
   decimals: number = 4
@@ -9,7 +9,7 @@ export  function getRandomInRange(
   return parseFloat(str);
 }
 
-export  function generateWord() {
+export function generateWord() {
   const words = [
     "Lorem",
     "Ipsum",
@@ -34,42 +34,36 @@ export  function generateWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
-export  function generateWords(n: number) {
+export function generateWords(n: number) {
   const words = [];
   for (let i = 0; i < n; i++) {
     words.push(generateWord());
   }
-  return words
+  return words;
+}
 
-export  function randomBoolean(){
+export function randomBoolean() {
   return Math.random() < 0.5;
 }
 
-
-export  function generateFakeKpis(n: number = 3): KpiItemType[] {
+export function generateFakeKpis(n: number) {
   const kpis: KpiItemType[] = [];
-
-  // Generate points in Tuscany
   for (let i = 0; i < n; i++) {
-    const obj = {
-        title: generateWords(getRandomInRange(1,4)),
-  value: getRandomInRange(0,9999),
-  percentage: randomBoolean()? getRandomInRange(1,99):undefined,
-  background_color:  randomBoolean()? "#efefef":"",
-  value_prefix: i%3 ===0 ? "curerncy": undefined,
-  value_suffix: i%3 ===0 ? "€": undefined,
-  show_flow:  randomBoolean(),
-  flow_value: Math.random(),
-  flow_direction:randomBoolean()? "+" : "-",
-  flow_detail?:randomBoolean() ? generateWords(1):undefined,
-  footer_text?:randomBoolean() ? generateWords(getRandomInRange(1,4)):undefined
-    }
-    kpis.push(obj);
+    kpis.push({
+      title: generateWords(getRandomInRange(1, 4)).join(" "),
+      value: getRandomInRange(0, 9999),
+      percentage: randomBoolean() ? "" + getRandomInRange(1, 99) : undefined,
+      background_color: randomBoolean() ? "#efefef" : "",
+      value_prefix: i % 3 === 0 ? "curerncy" : undefined,
+      value_suffix: i % 3 === 0 ? "€" : undefined,
+      show_flow: randomBoolean(),
+      flow_value: Math.random().toFixed(3),
+      flow_direction: randomBoolean() ? "+" : "-",
+      flow_detail: randomBoolean() ? "%" : "",
+      footer_text: randomBoolean()
+        ? generateWords(getRandomInRange(1, 4)).join(" ")
+        : undefined,
+    });
   }
-
-
   return kpis;
 }
-
-
-
