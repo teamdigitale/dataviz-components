@@ -1,5 +1,4 @@
 import React from "react";
-
 import type { FieldDataType, KpiItemType } from "../../types";
 import Kpi from "./KpiItem";
 import "./kpi.css";
