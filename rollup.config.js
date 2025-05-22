@@ -6,6 +6,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 // const packageJson = require("./package.json");
 import packageJson from "./package.json" assert { type: "json" };
+import css from "rollup-plugin-import-css";
 
 export default [
   {
@@ -23,6 +24,7 @@ export default [
       },
     ],
     plugins: [
+      css(), // Handles CSS imports
       peerDepsExternal(), // Excludes peer dependencies from the bundle
       resolve(), // Resolves node modules
       commonjs(), // Converts CommonJS modules to ES6

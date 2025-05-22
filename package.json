@@ -47,6 +47,7 @@
     "remark-gfm": "*",
     "rollup": "^4.35.0",
     "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-import-css": "^3.5.8",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^5.8.2"
   },
