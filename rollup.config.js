@@ -25,9 +25,13 @@ export default [
     ],
     plugins: [
       css({
-        minimize: true,
+        minify: true,
         extensions: [".css"],
-        extract: "dist/dataviz.css",
+        // output: "dataviz.css",
+        modules: true,
+        inject: true,
+        alwaysOutput: true,
+        include: ["**/**.css"],
       }), // Handles CSS imports
       peerDepsExternal(), // Excludes peer dependencies from the bundle
       resolve(), // Resolves node modules
