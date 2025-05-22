@@ -1,10 +1,11 @@
-import { createRoot } from "react-dom/client";
 import "./index.css";
+import { createRoot } from "react-dom/client";
 import SampleBarchart from "./SampleBarchart";
 import SamplePiechart from "./SamplePiechart";
 import SampleLinechart from "./SampleLinechart";
 import SampleGeomapchart from "./SampleGeomapchart";
 import SampleMap from "./SampleMap";
+import SampleKpis from "./SampleKpis";
 
 createRoot(document.getElementById("root")!).render(
   <div style={{ padding: 30, width: 600 }}>
@@ -19,6 +20,10 @@ createRoot(document.getElementById("root")!).render(
     <div style={{ marginTop: 50 }}>
       <h3>Pie Chart</h3>
       <SamplePiechart />
+    </div>
+    <div style={{ marginTop: 50, marginBottom: 50 }}>
+      <h3>Kpis</h3>
+      <SampleKpis />
     </div>
     <div style={{ marginTop: 50, height: 700 }}>
       <h3>GEO Map</h3>

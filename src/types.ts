@@ -111,3 +111,17 @@ export interface PointData {
   lat: number;
   region?: string; // Optional region for context
 }
+
+export interface KpiItemType {
+  title: string;
+  value: string | number;
+  percentage?: string;
+  background_color?: string;
+  value_prefix?: string;
+  value_suffix?: string;
+  show_flow?: boolean;
+  flow_value?: string | number;
+  flow_direction?: "+" | "-";
+  flow_detail?: string;
+  footer_text?: string;
+}

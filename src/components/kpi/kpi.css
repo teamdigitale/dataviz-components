@@ -1,0 +1,23 @@
+.kpi-group, .kpi-group.div {
+  box-sizing:border-box;
+}
+.kpi-group-vertical,
+.kpi-group-horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kpi-group-vertical{
+  flex-direction: column;
+}
+.kpi-group-item{
+  padding: 4px;
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 1200px) {
+  .kpi-group-vertical,
+  .kpi-group-horizontal{
+    display: block;
+  }
+}
