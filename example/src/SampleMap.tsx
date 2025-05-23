@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   RenderChart,
-  ClusterMap,
+  // ClusterMap,
   type PointData,
   type FieldDataType,
 } from "dataviz-components";
@@ -32,7 +32,16 @@ function App() {
     data: null,
   };
 
-  return <ClusterMap data={data} />;
+  //<ClusterMap data={data} />;
+  return (
+    <div>
+      <RenderChart
+        {...data}
+        fullH={false}
+        getPicture={() => console.log("getPicture")}
+      />
+    </div>
+  );
 }
 
 export default App;
