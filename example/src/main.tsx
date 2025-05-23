@@ -1,4 +1,3 @@
-import "./index.css";
 import { createRoot } from "react-dom/client";
 import SampleBarchart from "./SampleBarchart";
 import SamplePiechart from "./SamplePiechart";
@@ -6,6 +5,8 @@ import SampleLinechart from "./SampleLinechart";
 import SampleGeomapchart from "./SampleGeomapchart";
 import SampleMap from "./SampleMap";
 import SampleKpis from "./SampleKpis";
+
+import "dataviz-components/dist/style.css";
 
 createRoot(document.getElementById("root")!).render(
   <div style={{ padding: 30, width: 600 }}>

@@ -17,18 +17,8 @@ import Select from "ol/interaction/Select";
 import Overlay from "ol/Overlay";
 import { Coordinate } from "ol/coordinate";
 import { toLonLat } from "ol/proj";
-import { PointData } from "../../types";
+import { PointData, FieldDataType } from "../../types";
 import "./map.css";
-
-export interface ClusterMapComponentProps {
-  pointsData: PointData[];
-  height?: number;
-  clusterDistance?: number;
-  minDistance?: number;
-  initialZoom?: number;
-  initialCenter?: [number, number];
-  zoomOnClick?: boolean;
-}
 
 const styleCache: { [key: string]: Style } = {};
 
@@ -45,15 +35,22 @@ interface PopupInfo {
   displayCoordinates: string; // For showing in popup
 }
 
-const ClusterMapComponent: React.FC<ClusterMapComponentProps> = ({
-  pointsData,
-  height = 700,
-  clusterDistance = 50,
-  minDistance = 20,
-  initialZoom = 6,
-  initialCenter = [12.5, 41.9],
-  zoomOnClick = false,
-}) => {
+const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
+  const { dataSource, config } = data;
+  const { h } = config;
+  const clusterDistance = 50;
+  const minDistance = 20;
+  const zoomOnClick = false;
+
+  const pointsData = dataSource as PointData[];
+  const height = h || 700;
+
+  const [initialCenter] = useState<[number, number]>([
+    pointsData[0].lat,
+    pointsData[0].lon,
+  ]);
+  const initialZoom = 2;
+
   const mapElement = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
 

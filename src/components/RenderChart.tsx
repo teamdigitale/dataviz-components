@@ -7,6 +7,8 @@ import type { EChartsType } from "echarts";
 import React from "react";
 import dayjs from "dayjs";
 import { FieldDataType } from "../types";
+import ClusterMap from "./maps/ClusterMap";
+import KpiGroup from "./kpi/KpiGroup";
 
 type RenderProps = FieldDataType & {
   fullH: boolean;
@@ -59,18 +61,20 @@ function RenderChart(props: RenderProps) {
   // console.log("props", props);
   return (
     <div className='w-full h-full max-height-full'>
-      <div className='p-4'>
-        {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
-        {props.description && (
-          <p dangerouslySetInnerHTML={{ __html: `${props.description}` }} />
-        )}
-        {props.updatedAt && (
-          <small>
-            Ultimo aggiornamento:{" "}
-            {dayjs(props.updatedAt).format("DD/MM/YYYY HH:mm")}
-          </small>
-        )}
-      </div>
+      {!fullH && (
+        <div className='p-4'>
+          {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
+          {props.description && (
+            <p dangerouslySetInnerHTML={{ __html: `${props.description}` }} />
+          )}
+          {props.updatedAt && (
+            <small>
+              Ultimo aggiornamento:{" "}
+              {dayjs(props.updatedAt).format("DD/MM/YYYY HH:mm")}
+            </small>
+          )}
+        </div>
+      )}
       <div className='p-4'>
         <div className='w-full min-height-[500px]  h-full max-height-full'>
           <div ref={wrapRef}>
@@ -103,6 +107,8 @@ function RenderChart(props: RenderProps) {
                     isFullH={fullH}
                   />
                 )}
+                {props.chart === "map" && <ClusterMap data={props} />}
+                {props.chart === "kpi" && <KpiGroup data={props} />}
               </>
             )}
           </div>
