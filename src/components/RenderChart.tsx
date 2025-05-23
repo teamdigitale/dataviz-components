@@ -107,7 +107,7 @@ function RenderChart(props: RenderProps) {
                     isFullH={fullH}
                   />
                 )}
-                {props.chart === "map" && <ClusterMap data={props} />}
+                {props.chart === "cmap" && <ClusterMap data={props} />}
                 {props.chart === "kpi" && <KpiGroup data={props} />}
               </>
             )}

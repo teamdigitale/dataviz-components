@@ -1,6 +1,8 @@
-import { RenderChart } from "dataviz-components";
 import type { FieldDataType } from "dataviz-components";
-function App() {
+// import { RenderChart } from "dataviz-components";
+import RenderChart from "../../src/components/RenderChart";
+
+export default function App() {
   const sampleData: FieldDataType = {
     "id": "cm92sw7bf00076c5hsplehz2k",
     "name": "progetti_sul_territorio_tutti-piechart-2025-04-04_15-08",
@@ -101,16 +103,10 @@ function App() {
   return (
     <div>
       <RenderChart
-        {...(sampleData as FieldDataType)}
+        {...sampleData}
         fullH={false}
         getPicture={() => console.log("getPicture")}
       />
-      {/* <pre>
-        <small>{JSON.stringify(sampleData.id, null, 2)}</small>
-      </pre> */}
-      {/* <DataTable data={sampleData.data} /> */}
     </div>
   );
 }
-
-export default App;

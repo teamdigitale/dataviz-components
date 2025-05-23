@@ -1,10 +1,7 @@
+// import { RenderChart } from "dataviz-components";
+import RenderChart from "../../src/components/RenderChart";
 import { useState } from "react";
-import {
-  RenderChart,
-  // ClusterMap,
-  type PointData,
-  type FieldDataType,
-} from "dataviz-components";
+import { type PointData, type FieldDataType } from "dataviz-components";
 import { generateSamplePoints } from "./lib/generatePoints";
 
 function App() {
@@ -14,7 +11,7 @@ function App() {
   const data: FieldDataType = {
     id: "clustermap1",
     dataSource: pointsData,
-    chart: "map",
+    chart: "cmap",
     config: {
       direction: "horizontal",
       h: 500,

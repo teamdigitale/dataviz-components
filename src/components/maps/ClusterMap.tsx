@@ -42,7 +42,6 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   const clusterDistance = 50;
   const minDistance = 20;
   const zoomOnClick = false;
-  const pointsData = dataSource as PointData[];
   const height = h || 700;
 
   const mapElement = useRef<HTMLDivElement | null>(null);
@@ -53,13 +52,19 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   const [currentPopupInfo, setCurrentPopupInfo] = useState<PopupInfo | null>(
     null
   );
-  const initialCenter =
-    pointsData && pointsData[0]
-      ? [pointsData[0].lon, pointsData[0].lat]
-      : [0, 0];
+
+  const [pointsData, setPointsData] = useState<PointData[] | null>(null);
+  const [initialCenter, setCenter] = useState<[number, number] | null>(null);
 
   useEffect(() => {
-    if (!mapElement.current || mapRef.current || !pointsData.length) return;
+    if (dataSource) {
+      setPointsData(dataSource);
+      setCenter([dataSource[0].lon, dataSource[0].lat]);
+    }
+  }, [dataSource]);
+
+  useEffect(() => {
+    if (!mapElement.current || mapRef.current || !pointsData?.length) return;
 
     if (popupElementRef.current && !overlayRef.current) {
       const overlay = new Overlay({

@@ -1,4 +1,6 @@
-import { RenderChart, type FieldDataType } from "dataviz-components";
+// import { RenderChart } from "dataviz-components";
+import RenderChart from "../../src/components/RenderChart";
+import { type FieldDataType } from "dataviz-components";
 import { generateFakeKpis } from "./lib/utils";
 
 function App() {
