@@ -38,18 +38,12 @@ interface PopupInfo {
 const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   const { dataSource, config } = data;
   const { h } = config;
+  const initialZoom = 2;
   const clusterDistance = 50;
   const minDistance = 20;
   const zoomOnClick = false;
-
   const pointsData = dataSource as PointData[];
   const height = h || 700;
-
-  const [initialCenter] = useState<[number, number]>([
-    pointsData[0].lat,
-    pointsData[0].lon,
-  ]);
-  const initialZoom = 2;
 
   const mapElement = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
@@ -59,6 +53,9 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   const [currentPopupInfo, setCurrentPopupInfo] = useState<PopupInfo | null>(
     null
   );
+  const initialCenter = pointsData.length
+    ? [pointsData[0].lon, pointsData[0].lat]
+    : [0, 0];
 
   useEffect(() => {
     if (!mapElement.current || mapRef.current || !pointsData.length) return;
