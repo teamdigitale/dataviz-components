@@ -53,9 +53,10 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   const [currentPopupInfo, setCurrentPopupInfo] = useState<PopupInfo | null>(
     null
   );
-  const initialCenter = pointsData.length
-    ? [pointsData[0].lon, pointsData[0].lat]
-    : [0, 0];
+  const initialCenter =
+    pointsData && pointsData[0]
+      ? [pointsData[0].lon, pointsData[0].lat]
+      : [0, 0];
 
   useEffect(() => {
     if (!mapElement.current || mapRef.current || !pointsData.length) return;
