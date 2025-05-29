@@ -73,6 +73,7 @@ export type ChartConfigType = {
   areaColor?: string;
   nameProperty?: string;
   nameGap?: string;
+  preview?: string;
 };
 
 export interface StoreStateType {
