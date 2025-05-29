@@ -1,6 +1,7 @@
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType } from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
-import { type FieldDataType } from "dataviz-components";
+import { type FieldDataType } from "../../src/types";
+
 import { generateFakeKpis } from "./lib/utils";
 
 function App() {
@@ -28,11 +29,7 @@ function App() {
   // return <KpiGroup data={data} />;
   return (
     <div>
-      <RenderChart
-        {...data}
-        fullH={false}
-        getPicture={() => console.log("getPicture")}
-      />
+      <RenderChart {...data} getPicture={() => console.log("getPicture")} />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-
 import type { KpiItemType } from "../../types";
 
 export default function Kpi({ data }: { data: KpiItemType }) {

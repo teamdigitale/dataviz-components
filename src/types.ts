@@ -1,4 +1,4 @@
-export type MatrixType = [[string | number]];
+export type MatrixType = any; //[[string | number] | [[string] | [number]]] | [];
 
 export type SerieType = {
   name: string;
@@ -31,7 +31,8 @@ export type ChartPropsType = {
   data: FieldDataType;
   isMobile?: boolean;
   setEchartInstance: (i: any) => void;
-  isFullH: boolean;
+  rowHeight?: number;
+  hFactor?: number;
 };
 
 export type ChartConfigType = {
@@ -41,7 +42,7 @@ export type ChartConfigType = {
   labeLine: boolean;
   legend: boolean;
   legendPosition: string;
-  palette: string[];
+  palette: string | string[];
   tooltip: boolean;
   tooltipFormatter: string;
   valueFormatter: string;
@@ -63,7 +64,7 @@ export type ChartConfigType = {
   visualMapLeft?: string;
   visualMapOrient?: string;
   background?: string;
-  smooth?: boolean;
+  smooth?: string | number;
   showArea?: boolean;
   showAllSymbol?: boolean;
   showPieLabels?: boolean;
@@ -71,6 +72,7 @@ export type ChartConfigType = {
   showMapLabels?: boolean;
   areaColor?: string;
   nameProperty?: string;
+  nameGap?: string;
 };
 
 export interface StoreStateType {
@@ -125,3 +127,17 @@ export interface KpiItemType {
   flow_detail?: string;
   footer_text?: string;
 }
+
+export type InfosType = {
+  text: string;
+  labelDownload?: string;
+  labelShare?: string;
+  labelSource?: string;
+  labelUpdated?: string;
+  istance?: string;
+  sharedUrl?: string;
+  labelTabInfo?: string;
+  labelTabChart?: string;
+  labelTabData?: string;
+  labelTabSource?: string;
+};

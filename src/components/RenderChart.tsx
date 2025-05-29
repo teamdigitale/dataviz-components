@@ -1,17 +1,18 @@
-import BasicChart from "./BasicChart";
-import PieChart from "./PieChart";
-import GeoMapChart from "./GeoMapChart";
+import React from "react";
+import BasicChart from "./charts/BasicChart";
+import PieChart from "./charts/PieChart";
+import GeoMapChart from "./charts/GeoMapChart";
 import { getPieValues, getBasicValues, getMapValues } from "../lib/utils";
 import { useEffect, useState, useRef } from "react";
-import type { EChartsType } from "echarts";
-import React from "react";
-import dayjs from "dayjs";
-import { FieldDataType } from "../types";
 import ClusterMap from "./maps/ClusterMap";
 import KpiGroup from "./kpi/KpiGroup";
+import dayjs from "dayjs";
+import type { EChartsType } from "echarts";
+import type { FieldDataType } from "../types";
 
 type RenderProps = FieldDataType & {
-  fullH: boolean;
+  rowHeight?: number;
+  hFactor?: number;
   getPicture?: (dataUrl: string) => void;
 };
 function RenderChart(props: RenderProps) {
@@ -23,8 +24,7 @@ function RenderChart(props: RenderProps) {
     }, 1000);
   }, [props.config]);
 
-  const { fullH } = props;
-
+  const { rowHeight, hFactor = 1 } = props;
   const wrapRef = useRef(null);
   const [echartInstance, setEchartInstance] = useState<EChartsType | null>(
     null
@@ -58,10 +58,23 @@ function RenderChart(props: RenderProps) {
   }, [wrapRef]);
 
   if (loading) return null;
-  // console.log("props", props);
+
+  const baseStyle = {
+    width: "100%",
+    height: "100%",
+    maxHeight: "100%",
+  };
+  let chartWrapStyle = {
+    ...baseStyle,
+    minHeight: rowHeight ? rowHeight : props.config.h,
+  };
+
   return (
-    <div className='w-full h-full max-height-full'>
-      {!fullH && (
+    <div
+      // className='w-full h-full max-height-full'
+      style={baseStyle}
+    >
+      {!rowHeight && (
         <div className='p-4'>
           {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
           {props.description && (
@@ -75,43 +88,62 @@ function RenderChart(props: RenderProps) {
           )}
         </div>
       )}
-      <div className='p-4'>
-        <div className='w-full min-height-[500px]  h-full max-height-full'>
-          <div ref={wrapRef}>
-            {props && (
-              <>
-                {(props.chart === "bar" || props.chart === "line") && (
-                  <BasicChart
-                    id={props.id}
-                    data={getBasicValues(props)}
-                    isMobile={isMobile}
-                    setEchartInstance={setEchartInstance}
-                    isFullH={fullH}
-                  />
-                )}
-                {props.chart === "pie" && (
-                  <PieChart
-                    id={props.id}
-                    data={getPieValues(props)}
-                    isMobile={isMobile}
-                    setEchartInstance={setEchartInstance}
-                    isFullH={fullH}
-                  />
-                )}
-                {props.chart === "map" && (
-                  <GeoMapChart
-                    id={props.id}
-                    data={getMapValues(props)}
-                    isMobile={isMobile}
-                    setEchartInstance={setEchartInstance}
-                    isFullH={fullH}
-                  />
-                )}
-                {props.chart === "cmap" && <ClusterMap data={props} />}
-                {props.chart === "kpi" && <KpiGroup data={props} />}
-              </>
-            )}
-          </div>
+
+      <div
+        className={`w-full min-height-[${
+          rowHeight ? rowHeight + "px" : props.config.h + "px"
+        }] h-full max-height-full p-4`}
+        style={chartWrapStyle}
+      >
+        <div ref={wrapRef}>
+          {props && (
+            <>
+              {(props.chart === "bar" || props.chart === "line") && (
+                <BasicChart
+                  id={props.id}
+                  data={getBasicValues(props)}
+                  isMobile={isMobile}
+                  setEchartInstance={setEchartInstance}
+                  rowHeight={rowHeight}
+                  hFactor={hFactor}
+                />
+              )}
+              {props.chart === "pie" && (
+                <PieChart
+                  id={props.id}
+                  data={getPieValues(props)}
+                  isMobile={isMobile}
+                  setEchartInstance={setEchartInstance}
+                  rowHeight={rowHeight}
+                  hFactor={hFactor}
+                />
+              )}
+              {props.chart === "map" && (
+                <GeoMapChart
+                  id={props.id}
+                  data={getMapValues(props)}
+                  isMobile={isMobile}
+                  setEchartInstance={setEchartInstance}
+                  rowHeight={rowHeight}
+                  hFactor={hFactor}
+                />
+              )}
+              {props.chart === "cmap" && (
+                <ClusterMap
+                  data={props}
+                  rowHeight={rowHeight}
+                  hFactor={hFactor}
+                />
+              )}
+              {props.chart === "kpi" && (
+                <KpiGroup
+                  data={props}
+                  rowHeight={rowHeight}
+                  hFactor={hFactor}
+                />
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

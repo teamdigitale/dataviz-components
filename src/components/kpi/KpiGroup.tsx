@@ -3,7 +3,15 @@ import type { FieldDataType, KpiItemType } from "../../types";
 import Kpi from "./KpiItem";
 import "./kpi.css";
 
-export default function KpiGroup({ data }: { data: FieldDataType }) {
+export default function KpiGroup({
+  data,
+  hFactor = 1,
+  rowHeight,
+}: {
+  data: FieldDataType;
+  hFactor: number;
+  rowHeight?: number;
+}) {
   const { id, config } = data;
   const dataSource: KpiItemType[] = data.dataSource;
   const { direction } = config;
@@ -11,8 +19,17 @@ export default function KpiGroup({ data }: { data: FieldDataType }) {
   const kpiGroupClass = isVertical
     ? "kpi-group-vertical"
     : "kpi-group-horizontal";
+
+  const baseStyle = { maxWidth: "100%", maxHeight: "100%", overflow: "auto" };
+  let divStyle = {};
+  if (rowHeight) {
+    divStyle = {
+      ...baseStyle,
+      minHeight: rowHeight * hFactor,
+    };
+  }
   return (
-    <div id={id} className={`kpi-group ${kpiGroupClass}`}>
+    <div id={id} className={`kpi-group ${kpiGroupClass}`} style={divStyle}>
       {dataSource.map((item: KpiItemType, index: number) => (
         <div className='kpi-group-item' key={`${index}-${item.title}`}>
           <Kpi data={item} />

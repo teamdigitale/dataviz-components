@@ -1,6 +1,7 @@
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType } from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
-import type { FieldDataType } from "dataviz-components";
+import { type FieldDataType } from "../../src/types";
+
 function App() {
   const sampleData: FieldDataType = {
     "id": "cm2w17md9000113laexq0h432",
@@ -9,7 +10,6 @@ function App() {
     "chart": "line",
     "config": {
       "h": 350,
-      "w": null,
       "stack": false,
       "colors": ["#0066CC"],
       "legend": true,
@@ -17,7 +17,7 @@ function App() {
       "yLabel": "",
       "gridTop": "60",
       "nameGap": "40",
-      "palette": "_1_a",
+      "palette": ["_1_a"],
       "tooltip": true,
       "gridLeft": "10%",
       "labeLine": false,
@@ -105,11 +105,7 @@ function App() {
     "remoteUrl":
       "https://raw.githubusercontent.com/italia/padigitale2026-stats/refs/heads/master/dataviz.json",
     "isRemote": true,
-    "preview": null,
-    "userId": "cm0l0tpss000028spgagizbjt",
-    "createdAt": "2024-10-30T15:28:47.603Z",
-    "updatedAt": "2025-05-09T12:48:17.891Z",
-    dataSource: null,
+    "dataSource": null,
   };
 
   console.log("RenderChart", RenderChart);
@@ -117,7 +113,6 @@ function App() {
     <div>
       <RenderChart
         {...(sampleData as FieldDataType)}
-        fullH={false}
         getPicture={() => console.log("getPicture")}
       />
     </div>

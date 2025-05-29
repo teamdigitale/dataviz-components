@@ -8,16 +8,15 @@ import Cluster from "ol/source/Cluster";
 import VectorSource from "ol/source/Vector";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
-import { fromLonLat } from "ol/proj";
 import { Circle as CircleStyle, Fill, Stroke, Style, Text } from "ol/style";
-import { StyleLike } from "ol/style/Style";
 import { createEmpty, extend, isEmpty } from "ol/extent";
 import { click } from "ol/events/condition";
 import Select from "ol/interaction/Select";
 import Overlay from "ol/Overlay";
-import { Coordinate } from "ol/coordinate";
-import { toLonLat } from "ol/proj";
-import { PointData, FieldDataType } from "../../types";
+import { fromLonLat, toLonLat } from "ol/proj";
+import type { Coordinate } from "ol/coordinate";
+import type { StyleLike } from "ol/style/Style";
+import type { PointData, FieldDataType } from "../../types";
 import "./map.css";
 
 const styleCache: { [key: string]: Style } = {};
@@ -35,14 +34,22 @@ interface PopupInfo {
   displayCoordinates: string; // For showing in popup
 }
 
-const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
+const ClusterMapComponent = ({
+  data,
+  hFactor = 1,
+  rowHeight,
+}: {
+  data: FieldDataType;
+  hFactor: number;
+  rowHeight?: number;
+}) => {
   const { dataSource, config } = data;
   const { h } = config;
   const initialZoom = 2;
   const clusterDistance = 50;
   const minDistance = 20;
   const zoomOnClick = false;
-  const height = h || 700;
+  const height = rowHeight ? rowHeight * hFactor : h || 700;
 
   const mapElement = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
@@ -54,7 +61,7 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
   );
 
   const [pointsData, setPointsData] = useState<PointData[] | null>(null);
-  const [initialCenter, setCenter] = useState<[number, number] | null>(null);
+  const [initialCenter, setCenter] = useState<Coordinate | null>(null);
 
   useEffect(() => {
     if (dataSource) {
@@ -151,7 +158,7 @@ const ClusterMapComponent = ({ data }: { data: FieldDataType }) => {
 
     const osmLayer = new TileLayer({ source: new OSM() });
     const mapView = new View({
-      center: fromLonLat(initialCenter),
+      center: fromLonLat(initialCenter!),
       zoom: initialZoom,
       minZoom: 4,
     });

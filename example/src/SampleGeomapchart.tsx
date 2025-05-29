@@ -1,6 +1,7 @@
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType } from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
-import type { FieldDataType } from "dataviz-components";
+import { type FieldDataType } from "../../src/types";
+
 function App() {
   const sampleData: FieldDataType = {
     "id": "cm6ywt8h80001a8a31jqg416r",
@@ -9,7 +10,6 @@ function App() {
     "chart": "map",
     "config": {
       "h": 500,
-      "w": 0,
       "stack": false,
       "colors": [
         "hsla(210, 72%, 68%, 1)",
@@ -49,7 +49,7 @@ function App() {
       "yLabel": "",
       "gridTop": "60",
       "nameGap": "40",
-      "palette": "monocolore_a",
+      "palette": ["monocolore_a"],
       "tooltip": true,
       "gridLeft": "10%",
       "labeLine": false,
@@ -98,12 +98,8 @@ function App() {
       ["Veneto", 44],
     ],
     "publish": true,
-    "remoteUrl": null,
     "isRemote": false,
-    "preview": null,
-    "userId": "cm0l0tpss000028spgagizbjt",
-    "createdAt": "2025-02-10T10:27:45.799Z",
-    "updatedAt": "2025-05-21T06:39:35.575Z",
+    "dataSource": null,
   };
 
   console.log("RenderChart", RenderChart);
@@ -111,7 +107,6 @@ function App() {
     <div>
       <RenderChart
         {...(sampleData as FieldDataType)}
-        fullH={false}
         getPicture={() => console.log("getPicture")}
       />
     </div>

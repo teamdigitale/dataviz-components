@@ -1,15 +1,16 @@
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType } from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
-import type { FieldDataType } from "dataviz-components";
+import { type FieldDataType } from "../../src/types";
+
 function App() {
   const sampleData: FieldDataType = {
+    "dataSource": null,
     "id": "cm92sqeed00036c5hqlqdm0xb",
     "name": "avanzamento_dei_progetti-barchart-2025-04-04_15-03",
     "description": "avanzamento_dei_progetti",
     "chart": "bar",
     "config": {
       "h": 350,
-      "w": null,
       "zoom": "none",
       "stack": false,
       "colors": [
@@ -30,7 +31,7 @@ function App() {
       "yLabel": "",
       "gridTop": "60",
       "nameGap": "40",
-      "palette": "divergente_b",
+      "palette": ["divergente_b"],
       "tooltip": true,
       "gridLeft": "10%",
       "labeLine": false,
@@ -79,12 +80,8 @@ function App() {
       ],
     ],
     "publish": true,
-    "remoteUrl": null,
+    "remoteUrl": "",
     "isRemote": false,
-    "preview": "",
-    "userId": "cm0l0tpss000028spgagizbjt",
-    "createdAt": "2025-04-04T13:04:04.441Z",
-    "updatedAt": "2025-05-21T05:59:12.575Z",
   };
 
   console.log("RenderChart", RenderChart);
@@ -92,7 +89,6 @@ function App() {
     <div>
       <RenderChart
         {...(sampleData as FieldDataType)}
-        fullH={false}
         getPicture={() => console.log("getPicture")}
       />
     </div>

@@ -1,14 +1,15 @@
 import { useRef, useEffect, useState } from "react";
-import ReactEcharts, { EChartsOption } from "echarts-for-react";
-import { ChartPropsType, FieldDataType } from "../types";
-import { formatTooltip } from "../lib/utils";
+import ReactEcharts, { type EChartsOption } from "echarts-for-react";
+import type { ChartPropsType, FieldDataType } from "../../types";
+import { formatTooltip } from "../../lib/utils";
 import React from "react";
 
 function BasicChart({
   data,
   setEchartInstance,
+  rowHeight,
   isMobile = false,
-  isFullH = false,
+  hFactor = 1,
 }: ChartPropsType) {
   const refCanvas = useRef<ReactEcharts>(null);
   const [loaded, setLoaded] = useState(false);
@@ -227,15 +228,8 @@ function BasicChart({
     return options;
   }
 
-  // useEffect(() => {
-  //   if (data && refCanvas.current) {
-  //     const options: any = getOptions(data);
-  //     refCanvas.current?.getEchartsInstance().setOption(options);
-  //   }
-  // }, [data, refCanvas]);
-
   const config: any = data.config || null;
-  const height = config?.h || 500;
+  const height = (config?.h || 500) * hFactor;
   return (
     <div style={{ textAlign: "left" }}>
       <ReactEcharts
@@ -243,11 +237,10 @@ function BasicChart({
         ref={refCanvas as any}
         style={{
           width: "100%",
-          height: isFullH ? "100%" : height,
-          minHeight: isFullH ? height : "auto",
+          height: rowHeight ? "100%" : height,
+          minHeight: rowHeight ? height : "auto",
           maxHeight: "100%",
           maxWidth: "100%",
-          marginBottom: "30px",
         }}
       />
     </div>

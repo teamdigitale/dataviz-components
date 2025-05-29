@@ -1,6 +1,6 @@
-import type { FieldDataType } from "dataviz-components";
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType } from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
+import { type FieldDataType } from "../../src/types";
 
 export default function App() {
   const sampleData: FieldDataType = {
@@ -10,7 +10,7 @@ export default function App() {
     "chart": "pie",
     "config": {
       "h": 550,
-      "w": null,
+
       "stack": false,
       "colors": [
         "hsla(210, 72%, 68%, 1)",
@@ -91,12 +91,9 @@ export default function App() {
       ["Valle d'Aosta/Vallée d'Aoste", 588],
     ],
     "publish": true,
-    "remoteUrl": null,
+
     "isRemote": false,
-    "preview": "",
-    "userId": "cm0l0tpss000028spgagizbjt",
-    "createdAt": "2025-04-04T13:08:35.203Z",
-    "updatedAt": "2025-05-21T06:37:04.826Z",
+    "dataSource": null,
   };
 
   console.log("RenderChart", RenderChart);
@@ -104,7 +101,6 @@ export default function App() {
     <div>
       <RenderChart
         {...sampleData}
-        fullH={false}
         getPicture={() => console.log("getPicture")}
       />
     </div>

@@ -1,7 +1,8 @@
-// import { RenderChart } from "dataviz-components";
+// import { RenderChart, type FieldDataType,type PointData} from "dataviz-components";
 import RenderChart from "../../src/components/RenderChart";
+import { type FieldDataType, type PointData } from "../../src/types";
+
 import { useState } from "react";
-import { type PointData, type FieldDataType } from "dataviz-components";
 import { generateSamplePoints } from "./lib/generatePoints";
 
 function App() {
@@ -32,11 +33,7 @@ function App() {
   //<ClusterMap data={data} />;
   return (
     <div>
-      <RenderChart
-        {...data}
-        fullH={false}
-        getPicture={() => console.log("getPicture")}
-      />
+      <RenderChart {...data} getPicture={() => console.log("getPicture")} />
     </div>
   );
 }

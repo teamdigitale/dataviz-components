@@ -1,4 +1,4 @@
-import { ChartConfigType } from "../types";
+import type { ChartConfigType } from "../types";
 
 export function isNumeric(s: string) {
   /^[+-]?\d+(\.\d+)?$/.test(s);
@@ -206,7 +206,7 @@ export function getLetter(index: number) {
 
 //generate a string given the the length from random letters of the alphabet
 export function generateCategories(length: number) {
-  return Array.from({ length }, (_, index) => getLetter(getRandomInt(0, 25)));
+  return Array.from({ length }, (_) => getLetter(getRandomInt(0, 25)));
 }
 
 //generate a string given the the length from random letters of the alphabet
