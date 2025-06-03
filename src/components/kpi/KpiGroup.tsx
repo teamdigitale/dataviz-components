@@ -13,7 +13,7 @@ export default function KpiGroup({
   rowHeight?: number;
 }) {
   const { id, config } = data;
-  const dataSource: KpiItemType[] = data.dataSource;
+  const dataSource: KpiItemType[] = data.dataSource as KpiItemType[];
   const { direction } = config;
   const isVertical = direction === "vertical";
   const kpiGroupClass = isVertical

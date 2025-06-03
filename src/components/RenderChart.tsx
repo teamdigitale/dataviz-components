@@ -8,7 +8,7 @@ import ClusterMap from "./maps/ClusterMap";
 import KpiGroup from "./kpi/KpiGroup";
 import dayjs from "dayjs";
 import type { EChartsType } from "echarts";
-import type { FieldDataType } from "../types";
+import type { ChartPropsType, FieldDataType } from "../types";
 
 type RenderProps = FieldDataType & {
   rowHeight?: number;
@@ -122,6 +122,7 @@ function RenderChart(props: RenderProps) {
                 <GeoMapChart
                   id={props.id}
                   data={getMapValues(props)}
+                  dataSource={null}
                   isMobile={isMobile}
                   setEchartInstance={setEchartInstance}
                   rowHeight={rowHeight}

@@ -65,8 +65,11 @@ const ClusterMapComponent = ({
 
   useEffect(() => {
     if (dataSource) {
-      setPointsData(dataSource);
-      setCenter([dataSource[0].lon, dataSource[0].lat]);
+      setPointsData(dataSource as PointData[]);
+      setCenter([
+        (dataSource as PointData[])[0].lon,
+        (dataSource as PointData[])[0].lat,
+      ]);
     }
   }, [dataSource]);
 

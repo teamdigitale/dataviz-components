@@ -162,7 +162,7 @@ export default function ChartWrapper(props: ChartWrapperProps) {
           id={`tab2-${id}-content-${istance}`}
           role='tabpanel'
         >
-          <DataTable id={id} data={data.data} />
+          <DataTable id={id} data={data.data as any[]} />
         </div>
         <div
           aria-labelledby={`tab3-${id}-${istance}`}
@@ -184,9 +184,9 @@ export default function ChartWrapper(props: ChartWrapperProps) {
           <span className='fw-semibold text-uppercase me-2'>
             {labelSource || "Fonte dati"}:
           </span>
-          {data.dataSource && (
+          {/* {data.dataSource && (
             <MarkdownRenderer>{data.dataSource}</MarkdownRenderer>
-          )}
+          )} */}
         </div>
         <div className='pb-3 d-flex flex-wrap align-items-center'>
           <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>

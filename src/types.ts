@@ -1,4 +1,5 @@
-export type MatrixType = any; //[[string | number] | [[string] | [number]]] | [];
+// export type MatrixType = any; //[[string | number] | [[string] | [number]]] | [];
+export type MatrixType = (string | number)[][];
 
 export type SerieType = {
   name: string;
@@ -8,9 +9,9 @@ export type SerieType = {
 
 export type FieldDataType = {
   config: ChartConfigType;
-  dataSource: any;
   chart: string;
   data: MatrixType | null;
+  dataSource?: object[];
   name?: string;
   id?: string;
   description?: string;
