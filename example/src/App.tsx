@@ -6,10 +6,20 @@ import SampleMap from "./SampleMap";
 import SampleKpis from "./SampleKpis";
 
 import "dataviz-components/dist/style.css";
+import SampleTable from "./SampleTable";
+import SampleWrapper from "./SampleWrapper";
 
 export default function App() {
   return (
     <div style={{ padding: 30, width: 600 }}>
+      <div style={{ marginTop: 50, height: 900 }}>
+        <h3>Sample Wrapper</h3>
+        <SampleWrapper />
+      </div>
+      <div style={{ marginTop: 50 }}>
+        <h3>Table</h3>
+        <SampleTable />
+      </div>
       <div style={{ marginTop: 50, height: 700 }}>
         <h3>GEO Map</h3>
         <SampleGeomapchart />

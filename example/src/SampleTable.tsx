@@ -89,10 +89,6 @@ function App() {
   console.log("RenderChart", RenderChart);
   return (
     <div>
-      <RenderChart
-        {...(sampleData as FieldDataType)}
-        getPicture={() => console.log("getPicture")}
-      />
       <DataTable data={sampleData.data} />
     </div>
   );
