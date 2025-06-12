@@ -75,11 +75,7 @@ function RenderChart(props: RenderProps) {
       style={baseStyle}
     >
       {!rowHeight && (
-        <div className='p-4'>
-          {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
-          {props.description && (
-            <p dangerouslySetInnerHTML={{ __html: `${props.description}` }} />
-          )}
+        <div>
           {props.updatedAt && (
             <small>
               Ultimo aggiornamento:{" "}

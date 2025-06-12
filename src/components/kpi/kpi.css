@@ -1,5 +1,6 @@
-.kpi-group, .kpi-group.div {
-  box-sizing:border-box;
+.kpi-group,
+.kpi-group.div {
+  box-sizing: border-box;
 }
 .kpi-group-vertical,
 .kpi-group-horizontal {
@@ -7,17 +8,41 @@
   align-items: center;
   justify-content: center;
 }
-.kpi-group-vertical{
+
+.kpi-group-horizontal {
+  justify-content: flex-start;
+  overflow-x: scroll;
+}
+
+.kpi-group-vertical {
   flex-direction: column;
 }
-.kpi-group-item{
+.kpi-group-item {
   padding: 4px;
   border: 1px solid red;
 }
 
+.kpi-group-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.kpi-group-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.kpi-group-horizontal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.kpi-group-horizontal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @media screen and (max-width: 1200px) {
   .kpi-group-vertical,
-  .kpi-group-horizontal{
+  .kpi-group-horizontal {
     display: block;
   }
 }
