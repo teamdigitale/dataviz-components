@@ -5,7 +5,7 @@
 .kpi-group-vertical,
 .kpi-group-horizontal {
   display: flex;
-  align-items: center;
+
   justify-content: center;
 }
 
@@ -15,11 +15,14 @@
 }
 
 .kpi-group-vertical {
+  width: 100%;
   flex-direction: column;
+  align-items: flex-start;
 }
 .kpi-group-item {
   padding: 4px;
-  border: 1px solid red;
+  width:100%;
+  min-width: 3200px;
 }
 
 .kpi-group-horizontal::-webkit-scrollbar {

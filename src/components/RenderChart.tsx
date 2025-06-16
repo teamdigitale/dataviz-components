@@ -6,14 +6,14 @@ import { getPieValues, getBasicValues, getMapValues } from "../lib/utils";
 import { useEffect, useState, useRef } from "react";
 import ClusterMap from "./maps/ClusterMap";
 import KpiGroup from "./kpi/KpiGroup";
-import dayjs from "dayjs";
 import type { EChartsType } from "echarts";
-import type { ChartPropsType, FieldDataType } from "../types";
+import type { FieldDataType } from "../types";
 
 type RenderProps = FieldDataType & {
   rowHeight?: number;
   hFactor?: number;
   getPicture?: (dataUrl: string) => void;
+  getInstance?: (instance: EChartsType) => void;
 };
 function RenderChart(props: RenderProps) {
   const [loading, setLoading] = useState(false);
@@ -32,13 +32,19 @@ function RenderChart(props: RenderProps) {
   const [width, setWidth] = useState<number>(500);
   const isMobile = width <= 480 ? true : false;
 
+  /** Get Image */
   useEffect(() => {
-    if (echartInstance && props.getPicture) {
-      const dataUrl = (echartInstance! satisfies EChartsType).getDataURL();
-      props.getPicture(dataUrl);
+    if (echartInstance && (props.getPicture || props.getInstance)) {
+      if (props.getInstance) {
+        props.getInstance(echartInstance);
+      } else if (props.getPicture) {
+        const dataUrl = (echartInstance! satisfies EChartsType).getDataURL();
+        props.getPicture(dataUrl);
+      }
     }
   }, [echartInstance]);
 
+  /** Resize */
   function setDimension() {
     const element: any = wrapRef.current;
     if (!element) return;
@@ -57,8 +63,10 @@ function RenderChart(props: RenderProps) {
     };
   }, [wrapRef]);
 
+  /** Loading */
   if (loading) return null;
 
+  /** Default style */
   const baseStyle = {
     width: "100%",
     height: "100%",
@@ -69,26 +77,9 @@ function RenderChart(props: RenderProps) {
     minHeight: rowHeight ? rowHeight : props.config.h,
   };
 
+  /** Render  */
   return (
-    <div
-      // className='w-full h-full max-height-full'
-      style={baseStyle}
-    >
-      {/* {!rowHeight && (
-        <div className='p-4'>
-          {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
-          {props.description && (
-            <p dangerouslySetInnerHTML={{ __html: `${props.description}` }} />
-          )}
-          {props.updatedAt && (
-            <small>
-              Ultimo aggiornamento:{" "}
-              {dayjs(props.updatedAt).format("DD/MM/YYYY HH:mm")}
-            </small>
-          )}
-        </div>
-      )} */}
-
+    <div style={baseStyle}>
       <div
         className={`w-full min-height-[${
           rowHeight ? rowHeight + "px" : props.config.h + "px"

@@ -7,7 +7,8 @@ import {
 function App() {
   const sampleData: FieldDataType = {
     dataSource: null,
-    "id": "cm92sqeed00036c5hqlqdm0xb",
+    "id": "jcdjdkwbcl",
+    "updatedAt": "2025-06-16T16:13:16.783Z",
     "name": "avanzamento_dei_progetti-barchart-2025-04-04_15-03",
     "description": "avanzamento_dei_progetti",
     "chart": "bar",
@@ -85,11 +86,30 @@ function App() {
     "remoteUrl": "",
     "isRemote": false,
   };
-  const info = { text: "balbllabalb" };
+  const info = {
+    text: "balbllabalb",
+    updatedAt: "2025-04-04T15:03:00Z",
+    labelUpdated: "Dati aggiornati al",
+
+    labelShare: "Condividi",
+
+    labelSourceText:
+      "Fonte: Ministero dell'Innovazione Tecnologica e della Transizione Digitale",
+    labelSource: "Fonte Dati",
+
+    labelDownloadData: "Download Data",
+    labelDownloadImage: "Download Pic",
+  };
   console.log("RenderChart", RenderChart);
   return (
     <div>
-      <ChartWrapper data={sampleData} info={info} hFactor={1} />
+      <ChartWrapper
+        data={sampleData}
+        info={info}
+        enableDownloadData={true}
+        enableDownloadImage={true}
+        shareFunction={() => console.log("Share function called")}
+      />
     </div>
   );
 }

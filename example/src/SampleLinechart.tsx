@@ -1,4 +1,9 @@
-import { RenderChart, type FieldDataType } from "dataviz-components";
+import {
+  RenderChart,
+  type FieldDataType,
+  // DataTable,
+  // type MatrixType,
+} from "dataviz-components";
 
 function App() {
   const sampleData: FieldDataType = {
@@ -111,8 +116,10 @@ function App() {
     <div>
       <RenderChart
         {...(sampleData as FieldDataType)}
-        getPicture={() => console.log("getPicture")}
+        // getPicture={() => console.log("getPicture")}
+        // getInstance={(instance) => console.log("getInstance", instance)}
       />
+      {/* <DataTable data={sampleData.data as MatrixType} /> */}
     </div>
   );
 }

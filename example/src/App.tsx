@@ -11,8 +11,8 @@ import SampleWrapper from "./SampleWrapper";
 
 export default function App() {
   return (
-    <div style={{ padding: 30, width: 600 }}>
-      <div style={{ marginTop: 50, height: 900 }}>
+    <div style={{ padding: 30, width: 900 }}>
+      <div style={{ marginTop: 50, minHeight: 900 }}>
         <h3>Sample Wrapper</h3>
         <SampleWrapper />
       </div>

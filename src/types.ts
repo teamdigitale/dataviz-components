@@ -132,14 +132,19 @@ export interface KpiItemType {
 
 export type InfosType = {
   text: string;
-  labelDownload?: string;
-  labelShare?: string;
-  labelSource?: string;
-  labelUpdated?: string;
   istance?: string;
+
+  labelSource?: string;
+  labelTabSource?: string;
+  labelSourceText?: string;
+
+  labelShare?: string;
+  labelUpdated?: string;
   sharedUrl?: string;
   labelTabInfo?: string;
   labelTabChart?: string;
   labelTabData?: string;
-  labelTabSource?: string;
+
+  labelDownloadData?: string;
+  labelDownloadImage?: string;
 };

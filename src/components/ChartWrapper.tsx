@@ -1,23 +1,37 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { dataToCSV, downloadPng, downloadCSV } from "../lib/downloadUtils";
 import DataTable from "./DataTable";
 import { FieldDataType, InfosType } from "../types";
+import type { EChartsType } from "echarts";
 import RenderChart from "./RenderChart";
 
 export type ChartWrapperProps = {
   data: FieldDataType;
   info: InfosType;
-  hFactor: number;
+  spritePath?: string;
+  hFactor?: number;
   rowHeight?: number;
+  enableDownloadImage?: boolean;
+  enableDownloadData?: boolean;
+  shareFunction?: (id: string) => void;
 };
 
 export default function ChartWrapper(props: ChartWrapperProps) {
-  const { data, info, hFactor = 1, rowHeight } = props;
+  const {
+    data,
+    info,
+    hFactor = 1,
+    rowHeight,
+    enableDownloadData = true,
+    enableDownloadImage = true,
+    spritePath = "/sprites.svg",
+  } = props;
 
   const {
-    labelDownload = "Download",
+    labelDownloadData = "Download Data",
+    labelDownloadImage = "Download Pic",
     labelShare = "Condividi",
     labelSource = "Sorgente Dati",
     labelUpdated = "Aggiornato al",
@@ -25,16 +39,15 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     labelTabInfo = "Info",
     labelTabChart = "Grafico",
     labelTabData = "Tabella dati",
-
-    istance,
-    sharedUrl,
-
+    istance = "0",
     text = "",
   } = info;
 
   let tabs = [labelTabChart, labelTabData, labelTabInfo];
   const { id, config, chart } = data;
-  const [echartInstance, setEchartInstance] = useState(null);
+  const [echartInstance, setEchartInstance] = useState<EChartsType | null>(
+    null
+  );
 
   const chartType = chart;
   const csvData = dataToCSV(data.data);
@@ -44,13 +57,14 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     month: "numeric",
     day: "numeric",
   };
-  const updatedAt = new Date("" + data.updatedAt);
-  const formatUpdatedAt = updatedAt.toLocaleDateString("it-IT", dateOptions);
+  const formatUpdatedAt = data.updatedAt
+    ? new Date("" + data.updatedAt).toLocaleDateString("it-IT", dateOptions)
+    : "";
   const infoClean = text.replace(new RegExp("&gt;", "g"), ">");
   const chartHeight = rowHeight
     ? rowHeight * hFactor
-    : data.config.h
-    ? data.config.h
+    : config.h
+    ? config.h
     : chartType === "map"
     ? "500px"
     : chartType === "pie"
@@ -91,27 +105,34 @@ export default function ChartWrapper(props: ChartWrapperProps) {
   const wrapRef = useRef(null);
 
   return (
-    <div className='px-3 pt-3 px-md-4 pt-md-4'>
+    <div
+      className='px-3 pt-3 px-md-4 pt-md-4 lightgrey-bg-a3'
+      style={{
+        width: "100%",
+        maxWidth: "100%",
+        maxHeight: "100%",
+      }}
+    >
       <h3 className='mid-caption--lead fw-semibold text-black'>{data.name}</h3>
       <p
         className='mid-caption--large'
         dangerouslySetInnerHTML={{ __html: `${data.description}` }}
       />
       <ul
-        className='nav nav-tabs mid-nav-tabs lightgrey-bg-a3'
+        className='nav nav-tabs mid-nav-tabs auto lightgrey-bg-a3'
         id='myTab'
         role='tablist'
       >
         {tabs.map((name, i) => (
           <li
             key={`${id}-tab_${i}-${istance}`}
-            className='nav-item lightgrey-bg-a3'
+            className='nav-item'
             id='dataviz-tabs'
           >
             <a
               aria-controls={`tab${i + 1}-${id}-content-${istance}`}
               aria-selected='true'
-              className={`nav-link ${i === 0 ? "active" : ""}`}
+              className={`nav-link ${i === 0 ? "active" : ""} lightgrey-bg-a3`}
               data-bs-toggle='tab'
               href={`#tab${i + 1}-${id}-content-${istance}`}
               id={`tab${i + 1}-${id}`}
@@ -141,7 +162,7 @@ export default function ChartWrapper(props: ChartWrapperProps) {
               {...data}
               hFactor={hFactor}
               rowHeight={rowHeight}
-              
+              getInstance={setEchartInstance}
             />
           </div>
         </div>
@@ -161,68 +182,66 @@ export default function ChartWrapper(props: ChartWrapperProps) {
         >
           <div className='mid-tabs-pane-inner mid-caption--large'>
             {info && <MarkdownRenderer>{infoClean}</MarkdownRenderer>}
-            <div className='mt-5 mid-caption'>
-              {labelUpdated || "Dati aggiornati al"}{" "}
-              <span className='fw-semibold'>{formatUpdatedAt}</span>
-            </div>
+            {formatUpdatedAt && (
+              <div className='mt-5 mid-caption'>
+                {labelUpdated || "Dati aggiornati al"}{" "}
+                <span className='fw-semibold'>{formatUpdatedAt}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
       <div className='d-lg-flex justify-content-lg-between mid-caption '>
-        <div className='pt-2 d-flex'>
-          <span className='fw-semibold text-uppercase me-2'>
-            {labelSource || "Fonte dati"}:
-          </span>
-          {/* {data.dataSource && (
-            <MarkdownRenderer>{data.dataSource}</MarkdownRenderer>
-          )} */}
-        </div>
-        <div className='pb-3 d-flex flex-wrap align-items-center'>
-          <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>
-            <a
-              className='mid-button-link'
-              title={labelDownload || "Download CSV"}
-              aria-label={labelDownload || "Download CSV"}
-              onClick={() => downloadCSV(csvData, "" + id)}
-            >
-              {labelDownload || "Download"} CSV
-              <svg
-                className='icon icon-sm icon-primary ms-1'
-                focusable='false'
-                aria-label={`${labelDownload || "Download"} CSV`}
-                role='img'
+        <div></div>
+        <div className='pb-3 d-flex flex-wrap align-items-start'>
+          {enableDownloadData && (
+            <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>
+              <a
+                className='mid-button-link'
+                title={labelDownloadData || "Download CSV"}
+                aria-label={labelDownloadData || "Download CSV"}
+                onClick={() => downloadCSV(csvData, "" + id)}
               >
-                <use href='/images/sprite.svg#it-download'></use>
-              </svg>
-            </a>
-          </span>
-          <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>
-            <button
-              className='mid-button-link'
-              title={labelDownload || "Download PNG"}
-              aria-label={labelDownload || "Download PNG"}
-              onClick={() => downloadPng(echartInstance, "" + id)}
-            >
-              {labelDownload || "Download"} PNG
-              <svg
-                className='icon icon-sm icon-primary ms-1'
-                focusable='false'
-                aria-label={`${labelDownload || "Download"} PNG`}
-                role='img'
+                {labelDownloadData || "Download"} CSV
+                <svg
+                  className='icon icon-sm icon-primary ms-1'
+                  focusable='false'
+                  aria-label={`${labelDownloadData || "Download"} CSV`}
+                  role='img'
+                >
+                  <use href={`${spritePath}#it-download`}></use>
+                </svg>
+              </a>
+            </span>
+          )}
+          {enableDownloadImage && (
+            <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>
+              <a
+                className='mid-button-link'
+                title={labelDownloadImage || "Download PNG"}
+                aria-label={labelDownloadImage || "Download PNG"}
+                onClick={() => downloadPng(echartInstance, "" + id)}
               >
-                <use href='/images/sprite.svg#it-download'></use>
-              </svg>
-            </button>
-          </span>
-          <span className='ps-lg-2 pt-2 fw-bold text-primary'>
-            <div className='dropdown'>
-              <button
-                aria-expanded='false'
-                aria-haspopup='true'
-                className='mid-button-link dropdown-toggle'
-                data-bs-toggle='dropdown'
-                id='dropdownMenuLink'
-                type='button'
+                {labelDownloadImage || "Download Png"}
+                <svg
+                  className='icon icon-sm icon-primary ms-1'
+                  focusable='false'
+                  aria-label={`${labelDownloadImage || "Download PNG"}`}
+                  role='img'
+                >
+                  <use href={`${spritePath}#it-download`}></use>
+                </svg>
+              </a>
+            </span>
+          )}
+          {props.shareFunction && (
+            <span className='ps-lg-2 pt-2 fw-bold text-primary'>
+              <a
+                className='mid-button-link'
+                id={"share-link" + id}
+                onClick={() =>
+                  props.shareFunction && props.shareFunction("share-link" + id)
+                }
               >
                 {labelShare || "Condividi"}
                 <svg
@@ -231,34 +250,11 @@ export default function ChartWrapper(props: ChartWrapperProps) {
                   aria-label={labelShare || "Condividi"}
                   role='img'
                 >
-                  <use href='/images/sprite.svg#it-share'></use>
+                  <use href={`${spritePath}#it-share`}></use>
                 </svg>
-              </button>
-
-              <div aria-labelledby='dropdownMenuLink' className='dropdown-menu'>
-                <div className='link-list-wrapper'>
-                  <ul className='link-list px-4'>
-                    {sharableSocials.map((social) => {
-                      return (
-                        <li key={social}>
-                          <button
-                            className='mid-button-link text-capitalize text-primary fw-normal social-share'
-                            data-width='800'
-                            data-height='600'
-                            data-sharer={social}
-                            data-title={data.name}
-                            data-url={`${sharedUrl}#chart-${id}`}
-                          >
-                            {social}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </span>
+              </a>
+            </span>
+          )}
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ function App() {
   //<ClusterMap data={data} />;
   return (
     <div>
-      <RenderChart {...data} getPicture={() => console.log("getPicture")} />
+      <RenderChart {...data} />
     </div>
   );
 }
