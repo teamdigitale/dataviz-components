@@ -74,8 +74,12 @@ function RenderChart(props: RenderProps) {
       // className='w-full h-full max-height-full'
       style={baseStyle}
     >
-      {!rowHeight && (
-        <div>
+      {/* {!rowHeight && (
+        <div className='p-4'>
+          {props.name && <h4 className='text-xl font-bold'>{props.name}</h4>}
+          {props.description && (
+            <p dangerouslySetInnerHTML={{ __html: `${props.description}` }} />
+          )}
           {props.updatedAt && (
             <small>
               Ultimo aggiornamento:{" "}
@@ -83,7 +87,7 @@ function RenderChart(props: RenderProps) {
             </small>
           )}
         </div>
-      )}
+      )} */}
 
       <div
         className={`w-full min-height-[${

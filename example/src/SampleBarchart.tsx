@@ -1,12 +1,8 @@
-// import { RenderChart, type FieldDataType } from "dataviz-components";
-import RenderChart from "../../src/components/RenderChart";
-
-import { DataTable } from "dataviz-components";
-// import DataTable from "../../src/components/DataTable";
-import { type FieldDataType } from "../../src/types";
+import { RenderChart, DataTable, type FieldDataType } from "dataviz-components";
 
 function App() {
   const sampleData: FieldDataType = {
+    "dataSource": "",
     "id": "cm92sqeed00036c5hqlqdm0xb",
     "name": "avanzamento_dei_progetti-barchart-2025-04-04_15-03",
     "description": "avanzamento_dei_progetti",

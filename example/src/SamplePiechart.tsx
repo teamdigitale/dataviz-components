@@ -1,6 +1,4 @@
-// import { RenderChart, type FieldDataType } from "dataviz-components";
-import RenderChart from "../../src/components/RenderChart";
-import { type FieldDataType } from "../../src/types";
+import { RenderChart, type FieldDataType } from "dataviz-components";
 
 export default function App() {
   const sampleData: FieldDataType = {
@@ -93,7 +91,7 @@ export default function App() {
     "publish": true,
 
     "isRemote": false,
-    "dataSource": null,
+    "dataSource": "",
   };
 
   console.log("RenderChart", RenderChart);

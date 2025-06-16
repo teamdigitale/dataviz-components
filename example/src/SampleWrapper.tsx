@@ -1,8 +1,8 @@
-// import { RenderChart, type FieldDataType } from "dataviz-components";
-import RenderChart from "../../src/components/RenderChart";
-
-import { ChartWrapper, type FieldDataType } from "dataviz-components";
-// import DataTable from "../../src/components/DataTable";
+import {
+  ChartWrapper,
+  RenderChart,
+  type FieldDataType,
+} from "dataviz-components";
 
 function App() {
   const sampleData: FieldDataType = {

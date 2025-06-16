@@ -1,6 +1,8 @@
-// import { RenderChart, type FieldDataType,type PointData} from "dataviz-components";
-import RenderChart from "../../src/components/RenderChart";
-import { type FieldDataType, type PointData } from "../../src/types";
+import {
+  RenderChart,
+  type FieldDataType,
+  type PointData,
+} from "dataviz-components";
 
 import { useState } from "react";
 import { generateSamplePoints } from "./lib/generatePoints";
