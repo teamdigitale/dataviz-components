@@ -11,7 +11,7 @@ export type FieldDataType = {
   config: ChartConfigType;
   chart: string;
   data: MatrixType | null;
-  dataSource?: object[];
+  dataSource: any;
   name?: string;
   id?: string;
   description?: string;

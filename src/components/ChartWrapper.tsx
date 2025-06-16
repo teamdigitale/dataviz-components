@@ -89,18 +89,6 @@ export default function ChartWrapper(props: ChartWrapperProps) {
   };
 
   const wrapRef = useRef(null);
-  // const [width, setWidth] = useState<number | undefined>();
-  // function setDimension() {
-  //   const dimension: number = (wrapRef?.current as any).clientWidth || 250;
-  //   setWidth(dimension);
-  // }
-  // useEffect(() => {
-  //   window.addEventListener("resize", setDimension);
-  //   setDimension();
-  //   return () => {
-  //     window.removeEventListener("resize", setDimension);
-  //   };
-  // }, []);
 
   return (
     <div className='px-3 pt-3 px-md-4 pt-md-4'>
@@ -153,6 +141,7 @@ export default function ChartWrapper(props: ChartWrapperProps) {
               {...data}
               hFactor={hFactor}
               rowHeight={rowHeight}
+              
             />
           </div>
         </div>

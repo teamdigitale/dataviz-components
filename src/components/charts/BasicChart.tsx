@@ -112,7 +112,7 @@ function BasicChart({
             xAxis: {
               ...xName,
               type: "category",
-              data: data.dataSource.categories,
+              data: data.dataSource?.categories,
               axisTick: { show: false },
               axisLabel: {
                 hideOverlap: true,
@@ -131,7 +131,7 @@ function BasicChart({
               ...xName,
               nameRotate: 90,
               type: "category",
-              data: data.dataSource.categories,
+              data: data.dataSource?.categories,
               axisTick: { show: false },
               axisLabel: { show: responsive ? !isMobile : true },
             },
@@ -178,7 +178,7 @@ function BasicChart({
       ],
       ...axis,
       grid,
-      series: data.dataSource.series.map((serie: any) => {
+      series: data.dataSource?.series?.map((serie: any) => {
         let rest = {};
         if (serie.type === "bar" && config.stack) {
           let stack: any = config.stack

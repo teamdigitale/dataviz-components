@@ -122,7 +122,6 @@ function RenderChart(props: RenderProps) {
                 <GeoMapChart
                   id={props.id}
                   data={getMapValues(props)}
-                  dataSource={null}
                   isMobile={isMobile}
                   setEchartInstance={setEchartInstance}
                   rowHeight={rowHeight}
