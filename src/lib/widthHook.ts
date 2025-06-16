@@ -7,7 +7,8 @@ export default function resizeHook(
   const [width, setWidth] = useState<number>(initialWidth);
 
   function setDimension() {
-    const dimension: number = wrapRef?.current.clientWidth || initialWidth;
+    const dimension: number =
+      (wrapRef as any).current.clientWidth || initialWidth;
     setWidth(dimension);
   }
 
