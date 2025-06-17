@@ -135,8 +135,7 @@ export type InfosType = {
   istance?: string;
 
   labelSource?: string;
-  labelTabSource?: string;
-  labelSourceText?: string;
+  sourceTextInfo?: string;
 
   labelShare?: string;
   labelUpdated?: string;

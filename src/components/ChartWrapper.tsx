@@ -41,6 +41,7 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     labelTabData = "Tabella dati",
     istance = "0",
     text = "",
+    sourceTextInfo = "",
   } = info;
 
   let tabs = [labelTabChart, labelTabData, labelTabInfo];
@@ -192,7 +193,16 @@ export default function ChartWrapper(props: ChartWrapperProps) {
         </div>
       </div>
       <div className='d-lg-flex justify-content-lg-between mid-caption '>
-        <div></div>
+        {sourceTextInfo && (
+          <div className='pt-2 d-flex'>
+            <span className='fw-semibold text-uppercase me-2'>
+              {labelSource || "Fonte dati"}:
+            </span>
+            {sourceTextInfo && (
+              <MarkdownRenderer>{sourceTextInfo}</MarkdownRenderer>
+            )}
+          </div>
+        )}
         <div className='pb-3 d-flex flex-wrap align-items-start'>
           {enableDownloadData && (
             <span className='ps-lg-2 pe-3 pe-lg-0 pt-2 pb-lg-0 fw-bold text-primary'>

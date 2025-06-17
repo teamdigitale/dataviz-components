@@ -93,9 +93,8 @@ function App() {
 
     labelShare: "Condividi",
 
-    labelSourceText:
-      "Fonte: Ministero dell'Innovazione Tecnologica e della Transizione Digitale",
     labelSource: "Fonte Dati",
+    sourceTextInfo: "*Fonte:* Ministero della Transizione Digitale",
 
     labelDownloadData: "Download Data",
     labelDownloadImage: "Download Pic",
