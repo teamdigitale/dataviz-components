@@ -132,7 +132,6 @@ export interface KpiItemType {
 
 export type InfosType = {
   text: string;
-  istance?: string;
 
   labelSource?: string;
   sourceTextInfo?: string;

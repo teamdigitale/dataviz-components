@@ -8,6 +8,7 @@ import type { EChartsType } from "echarts";
 import RenderChart from "./RenderChart";
 
 export type ChartWrapperProps = {
+  id: string;
   data: FieldDataType;
   info: InfosType;
   spritePath?: string;
@@ -20,6 +21,7 @@ export type ChartWrapperProps = {
 
 export default function ChartWrapper(props: ChartWrapperProps) {
   const {
+    id,
     data,
     info,
     hFactor = 1,
@@ -39,13 +41,12 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     labelTabInfo = "Info",
     labelTabChart = "Grafico",
     labelTabData = "Tabella dati",
-    istance = "0",
     text = "",
     sourceTextInfo = "",
   } = info;
 
   let tabs = [labelTabChart, labelTabData, labelTabInfo];
-  const { id, config, chart } = data;
+  const { config, chart } = data;
   const [echartInstance, setEchartInstance] = useState<EChartsType | null>(
     null
   );
@@ -71,8 +72,6 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     : chartType === "pie"
     ? "350px"
     : "300px";
-
-  const sharableSocials = ["facebook", "twitter", "linkedin", "whatsapp"];
 
   function LinkRenderer(props: any) {
     return (
@@ -125,17 +124,13 @@ export default function ChartWrapper(props: ChartWrapperProps) {
         role='tablist'
       >
         {tabs.map((name, i) => (
-          <li
-            key={`${id}-tab_${i}-${istance}`}
-            className='nav-item'
-            id='dataviz-tabs'
-          >
+          <li key={`${id}-tab_${i}`} className='nav-item' id='dataviz-tabs'>
             <a
-              aria-controls={`tab${i + 1}-${id}-content-${istance}`}
+              aria-controls={`tab${i + 1}-${id}-content`}
               aria-selected='true'
               className={`nav-link ${i === 0 ? "active" : ""} lightgrey-bg-a3`}
               data-bs-toggle='tab'
-              href={`#tab${i + 1}-${id}-content-${istance}`}
+              href={`#tab${i + 1}-${id}-content`}
               id={`tab${i + 1}-${id}`}
               role='tab'
             >
@@ -146,10 +141,10 @@ export default function ChartWrapper(props: ChartWrapperProps) {
       </ul>
       <div className='tab-content mid-tabs-content' id='myTabContent'>
         <div
-          aria-labelledby={`tab1-${id}-${istance}`}
+          aria-labelledby={`tab1-${id}`}
           className='tab-pane mid-tabs-pane my-4 fade show active'
           style={{ height: chartHeight }}
-          id={`tab1-${id}-content-${istance}`}
+          id={`tab1-${id}-content`}
           role='tabpanel'
         >
           <div
@@ -168,17 +163,17 @@ export default function ChartWrapper(props: ChartWrapperProps) {
           </div>
         </div>
         <div
-          aria-labelledby={`tab2-${id}-${istance}`}
+          aria-labelledby={`tab2-${id}`}
           className='tab-pane mid-tabs-pane my-4 fade'
-          id={`tab2-${id}-content-${istance}`}
+          id={`tab2-${id}-content`}
           role='tabpanel'
         >
           <DataTable id={id} data={data.data as any[]} />
         </div>
         <div
-          aria-labelledby={`tab3-${id}-${istance}`}
+          aria-labelledby={`tab3-${id}`}
           className='tab-pane mid-tabs-pane my-4 fade'
-          id={`tab3-${id}-content-${istance}`}
+          id={`tab3-${id}-content`}
           role='tabpanel'
         >
           <div className='mid-tabs-pane-inner mid-caption--large'>

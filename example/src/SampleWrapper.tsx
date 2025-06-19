@@ -9,8 +9,8 @@ function App() {
     dataSource: null,
     "id": "jcdjdkwbcl",
     "updatedAt": "2025-06-16T16:13:16.783Z",
-    "name": "avanzamento_dei_progetti-barchart-2025-04-04_15-03",
-    "description": "avanzamento_dei_progetti",
+    "name": "Avanzamento progetti",
+    "description": "",
     "chart": "bar",
     "config": {
       "h": 350,
@@ -103,6 +103,7 @@ function App() {
   return (
     <div>
       <ChartWrapper
+        id='jcdjdkwbcl'
         data={sampleData}
         info={info}
         enableDownloadData={true}
