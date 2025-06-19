@@ -20,7 +20,7 @@ export default function KpiGroup({
     ? "kpi-group-vertical"
     : "kpi-group-horizontal";
 
-  const baseStyle = { maxWidth: "100%", maxHeight: "100%", overflow: "auto" };
+  const baseStyle = { maxWidth: "100%", maxHeight: "100%" };
   let divStyle = {};
   if (rowHeight) {
     divStyle = {
@@ -29,7 +29,11 @@ export default function KpiGroup({
     };
   }
   return (
-    <div id={id} className={`kpi-group ${kpiGroupClass}`} style={divStyle}>
+    <div
+      id={id}
+      className={`lightgrey-bg-a3 kpi-group ${kpiGroupClass}`}
+      style={divStyle}
+    >
       {dataSource.map((item: KpiItemType, index: number) => (
         <div className='kpi-group-item' key={`${index}-${item.title}`}>
           <Kpi data={item} />

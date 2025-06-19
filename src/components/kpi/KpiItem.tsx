@@ -20,7 +20,7 @@ export default function Kpi({ data }: { data: KpiItemType }) {
   } = data;
 
   return (
-    <div className='kpi-item'>
+    <div className='kpi-item white-bg'>
       <div className={`p-2 ps-3 ${background_color || ""} ${border_classes}`}>
         <div className='mid-caption--xlarge fw-semibold.text-black'>
           {title}
@@ -40,18 +40,20 @@ export default function Kpi({ data }: { data: KpiItemType }) {
               {value_suffix}
             </span>
           )}
-          {percentage && <span className='mid-caption ms-3'>{percentage}</span>}
+          {percentage && (
+            <span className='mid-caption--xsmall ms-1'>{percentage}</span>
+          )}
 
           {show_flow && (
             <span
               className={`${
                 flow_direction == "+" ? "bg-success" : "bg-danger"
-              } text-white py-1 px-3 rounded ms-3 mid-caption`}
+              } text-white py-1 px-1 rounded ms-1 mid-caption--xsmall`}
             >
               {flow_value && (
                 <span className='font-semibold'>
                   <span
-                    className='me-3'
+                    className='me-1'
                     dangerouslySetInnerHTML={{
                       __html: flow_direction == "+" ? "&#8593;" : "&#8595;",
                     }}
@@ -59,7 +61,7 @@ export default function Kpi({ data }: { data: KpiItemType }) {
                   {flow_value}
                 </span>
               )}
-              {flow_detail && <span className='ms-3'>{flow_detail}</span>}
+              {flow_detail && <span className='ms-1'>{flow_detail}</span>}
             </span>
           )}
         </div>
