@@ -1,5 +1,4 @@
 import {
-  RenderChart,
   DataTable,
   type FieldDataType,
   type MatrixType,

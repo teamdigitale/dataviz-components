@@ -9,7 +9,7 @@ function App() {
     "description": "",
     "chart": "bar",
     "config": {
-      "background": "pink",
+      "background": "#fbfbfb",
       "h": 350,
       "zoom": "none",
       "stack": false,
@@ -71,7 +71,7 @@ function App() {
         6842179,
       ],
       ["1.4.3 Adozione PagoPA e AppIO", 103323916, 114533452, 290142632],
-      ["1.4.4 Adozione identit�� digitale", 55370000, 70083459, 80546541],
+      ["1.4.4 Adozione identità digitale", 55370000, 70083459, 80546541],
       [
         "1.4.5 Digitalizzazione degli avvisi pubblici",
         99546827,
@@ -84,15 +84,14 @@ function App() {
     "isRemote": false,
   };
   const info = {
+    title: "Avanzamento progetti",
+    subTitle: "sottotitolo",
     text: "balbllabalb",
     updatedAt: "2025-04-04T15:03:00Z",
     labelUpdated: "Dati aggiornati al",
-
     labelShare: "Condividi",
-
     labelSource: "Fonte Dati",
     sourceTextInfo: "*Fonte:* Ministero della Transizione Digitale",
-
     labelDownloadData: "Download Data",
     labelDownloadImage: "Download Pic",
   };
