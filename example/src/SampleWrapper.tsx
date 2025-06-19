@@ -1,8 +1,4 @@
-import {
-  ChartWrapper,
-  RenderChart,
-  type FieldDataType,
-} from "dataviz-components";
+import { ChartWrapper, type FieldDataType } from "dataviz-components";
 
 function App() {
   const sampleData: FieldDataType = {
@@ -13,6 +9,7 @@ function App() {
     "description": "",
     "chart": "bar",
     "config": {
+      "background": "pink",
       "h": 350,
       "zoom": "none",
       "stack": false,
@@ -99,7 +96,6 @@ function App() {
     labelDownloadData: "Download Data",
     labelDownloadImage: "Download Pic",
   };
-  console.log("RenderChart", RenderChart);
   return (
     <div>
       <ChartWrapper

@@ -9,7 +9,6 @@ import { generateSamplePoints } from "./lib/generatePoints";
 
 function App() {
   const [pointsData] = useState<PointData[]>(() => generateSamplePoints(100));
-  console.log("RenderChart", RenderChart);
 
   const data: FieldDataType = {
     id: "clustermap1",

@@ -19,6 +19,7 @@ function App() {
       totalLabel: "",
       tooltipTrigger: "",
       colors: [],
+      background: "pink",
     },
     data: null,
   };
@@ -40,6 +41,7 @@ function App() {
       totalLabel: "",
       tooltipTrigger: "",
       colors: [],
+      background: "skyblue",
     },
     data: null,
   };

@@ -111,7 +111,6 @@ function App() {
     "dataSource": "",
   };
 
-  console.log("RenderChart", RenderChart);
   return (
     <div>
       <RenderChart

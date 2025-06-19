@@ -12,6 +12,7 @@ function App() {
     "description": "xxx",
     "chart": "map",
     "config": {
+      "background": "pink",
       "h": 500,
       "stack": false,
       "colors": [
@@ -105,7 +106,6 @@ function App() {
     "dataSource": null,
   };
 
-  console.log("RenderChart", RenderChart);
   return (
     <div>
       <RenderChart

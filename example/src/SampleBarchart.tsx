@@ -13,6 +13,7 @@ function App() {
     "description": "avanzamento_dei_progetti",
     "chart": "bar",
     "config": {
+      "background": "#fff",
       "h": 350,
       "zoom": "none",
       "stack": false,
@@ -87,7 +88,6 @@ function App() {
     "isRemote": false,
   };
 
-  console.log("RenderChart", RenderChart);
   return (
     <div>
       <RenderChart

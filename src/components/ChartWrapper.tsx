@@ -8,7 +8,7 @@ import type { EChartsType } from "echarts";
 import RenderChart from "./RenderChart";
 
 export type ChartWrapperProps = {
-  id: string;
+  id?: string;
   data: FieldDataType;
   info: InfosType;
   spritePath?: string;
@@ -21,7 +21,6 @@ export type ChartWrapperProps = {
 
 export default function ChartWrapper(props: ChartWrapperProps) {
   const {
-    id,
     data,
     info,
     hFactor = 1,
@@ -30,6 +29,11 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     enableDownloadImage = true,
     spritePath = "/sprites.svg",
   } = props;
+
+  let { id = (Math.random() + 1).toString(36).substring(7) } = props;
+  if (data.id) {
+    id = data.id;
+  }
 
   const {
     labelDownloadData = "Download Data",
@@ -43,6 +47,8 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     labelTabData = "Tabella dati",
     text = "",
     sourceTextInfo = "",
+    title = data.name || "",
+    subTitle = data.description || "",
   } = info;
 
   let tabs = [labelTabChart, labelTabData, labelTabInfo];
@@ -103,36 +109,46 @@ export default function ChartWrapper(props: ChartWrapperProps) {
   };
 
   const wrapRef = useRef(null);
-
   return (
     <div
-      className='px-3 pt-3 px-md-4 pt-md-4 lightgrey-bg-a3'
+      className='px-3 pt-3 px-md-4 pt-md-4'
       style={{
         width: "100%",
         maxWidth: "100%",
         maxHeight: "100%",
+        backgroundColor: data.config.background || "#F2F7FC",
       }}
     >
-      <h3 className='mid-caption--lead fw-semibold text-black'>{data.name}</h3>
-      <p
-        className='mid-caption--large'
-        dangerouslySetInnerHTML={{ __html: `${data.description}` }}
-      />
+      {title && (
+        <h3 className='mid-caption--lead fw-semibold text-black'>{title}</h3>
+      )}
+      {subTitle && (
+        <p
+          className='mid-caption--large'
+          dangerouslySetInnerHTML={{ __html: `${subTitle}` }}
+        />
+      )}
       <ul
-        className='nav nav-tabs mid-nav-tabs auto lightgrey-bg-a3'
+        className='nav nav-tabs mid-nav-tabs auto'
         id='myTab'
         role='tablist'
+        style={{
+          backgroundColor: data.config.background || "#F2F7FC",
+        }}
       >
         {tabs.map((name, i) => (
           <li key={`${id}-tab_${i}`} className='nav-item' id='dataviz-tabs'>
             <a
               aria-controls={`tab${i + 1}-${id}-content`}
               aria-selected='true'
-              className={`nav-link ${i === 0 ? "active" : ""} lightgrey-bg-a3`}
+              className={`nav-link ${i === 0 ? "active" : ""}`}
               data-bs-toggle='tab'
               href={`#tab${i + 1}-${id}-content`}
               id={`tab${i + 1}-${id}`}
               role='tab'
+              style={{
+                backgroundColor: data.config.background || "#F2F7FC",
+              }}
             >
               {name}
             </a>
