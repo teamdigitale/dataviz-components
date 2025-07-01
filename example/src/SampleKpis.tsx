@@ -1,4 +1,9 @@
-import { RenderChart, type FieldDataType } from "dataviz-components";
+import {
+  RenderChart,
+  type FieldDataType,
+  KpiItem,
+  type KpiItemType,
+} from "dataviz-components";
 import { generateFakeKpis } from "./lib/utils";
 
 function App() {
@@ -46,11 +51,25 @@ function App() {
     data: null,
   };
   // return <KpiGroup data={data} />;
+
+  const singleKpi1 = generateFakeKpis(1)[0] as KpiItemType;
+  const singleKpi2 = generateFakeKpis(1)[0] as KpiItemType;
+
   return (
     <div>
       <RenderChart {...data1} />
       <hr />
       <RenderChart {...data2} />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-6'>
+            <KpiItem data={singleKpi1} />
+          </div>
+          <div className='col-6'>
+            <KpiItem data={singleKpi2} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
