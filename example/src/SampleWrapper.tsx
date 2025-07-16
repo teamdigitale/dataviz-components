@@ -94,6 +94,8 @@ function App() {
     sourceTextInfo: "*Fonte:* Ministero della Transizione Digitale",
     labelDownloadData: "Download Data",
     labelDownloadImage: "Download Pic",
+    chartFooterText:
+      "Questo è un testo di *esempio* per il _footer_ del grafico.",
   };
   return (
     <div>

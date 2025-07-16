@@ -147,4 +147,6 @@ export type InfosType = {
 
   labelDownloadData?: string;
   labelDownloadImage?: string;
+
+  chartFooterText?: string;
 };

@@ -49,6 +49,7 @@ export default function ChartWrapper(props: ChartWrapperProps) {
     sourceTextInfo = "",
     title = data.name || "",
     subTitle = data.description || "",
+    chartFooterText = "",
   } = info;
 
   let tabs = [labelTabChart, labelTabData, labelTabInfo];
@@ -159,14 +160,14 @@ export default function ChartWrapper(props: ChartWrapperProps) {
         <div
           aria-labelledby={`tab1-${id}`}
           className='tab-pane mid-tabs-pane my-4 fade show active'
-          style={{ height: chartHeight }}
+          style={{ minHeight: chartHeight }}
           id={`tab1-${id}-content`}
           role='tabpanel'
         >
           <div
             key={id}
             className='mid-chart'
-            style={{ height: chartHeight }}
+            style={{ height: chartHeight, position: "relative" }}
             ref={wrapRef}
           >
             <RenderChart
@@ -177,6 +178,11 @@ export default function ChartWrapper(props: ChartWrapperProps) {
               getInstance={setEchartInstance}
             />
           </div>
+          {chartFooterText && (
+            <div className='py-4 mid-caption mid-caption--small text-secondary text-sm-center'>
+              <MarkdownRenderer>{chartFooterText}</MarkdownRenderer>
+            </div>
+          )}
         </div>
         <div
           aria-labelledby={`tab2-${id}`}
