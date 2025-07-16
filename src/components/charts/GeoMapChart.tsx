@@ -57,6 +57,17 @@ function GeoMapChart({
         fontSize: 12,
       },
       tooltip,
+      dataZoom: [
+        {
+          type: "inside",
+          disabled: config.zoom === "none",
+          zoomLock: true,
+          zoomOnMouseWheel: "ctrl",
+          start: 20,
+          end: 100,
+        },
+      ],
+
       visualMap: {
         left: config.visualMapLeft ?? "right",
         orient: config.visualMapOrient ?? "vertical",
