@@ -67,7 +67,6 @@ function GeoMapChart({
           end: 100,
         },
       ],
-
       visualMap: {
         left: config.visualMapLeft ?? "right",
         orient: config.visualMapOrient ?? "vertical",
