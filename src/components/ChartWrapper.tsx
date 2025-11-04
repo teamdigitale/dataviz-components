@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { dataToCSV, downloadPng, downloadCSV } from "../lib/downloadUtils";
-import DataTable from "./DataTable";
+import DataTable from "./dataTable/DataTable";
 import { FieldDataType, InfosType } from "../types";
 import type { EChartsType } from "echarts";
 import RenderChart from "./RenderChart";
