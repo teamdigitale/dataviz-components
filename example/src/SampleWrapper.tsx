@@ -10,7 +10,7 @@ function App() {
     "chart": "bar",
     "config": {
       "background": "#fbfbfb",
-      "h": 350,
+      "h": 600,
       "zoom": "none",
       "stack": false,
       "colors": [
@@ -91,7 +91,7 @@ function App() {
     labelUpdated: "Dati aggiornati al",
     labelShare: "Condividi",
     labelSource: "Fonte Dati",
-    sourceTextInfo: "*Fonte:* Ministero della Transizione Digitale",
+    sourceTextInfo: "*Ministero della Transizione Digitale*",
     labelDownloadData: "Download Data",
     labelDownloadImage: "Download Pic",
     chartFooterText:

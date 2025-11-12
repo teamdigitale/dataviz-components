@@ -237,8 +237,8 @@ function BasicChart({
         ref={refCanvas as any}
         style={{
           width: "100%",
-          height: rowHeight ? "100%" : height,
-          minHeight: rowHeight ? height : "auto",
+          height: rowHeight ? "100%" : `${height}px`,
+          minHeight: rowHeight ? rowHeight : "auto",
           maxHeight: "100%",
           maxWidth: "100%",
         }}
