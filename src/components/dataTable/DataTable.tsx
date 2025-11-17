@@ -109,6 +109,9 @@ export default function DataTable({
                           header.column.getToggleSortingHandler()?.(e);
                         }
                       }}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                      }}
                       tabIndex={0}
                       style={{ cursor: "pointer" }}
                       aria-sort={
