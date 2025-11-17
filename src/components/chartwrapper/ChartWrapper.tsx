@@ -115,6 +115,9 @@ export default function ChartWrapper(props: ChartWrapperProps) {
                   className="cw-tab"
                   aria-controls={`${tabId}-content`}
                   aria-selected={activeTab === i}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                  }}
                   onClick={() => setActiveTab(i)}
                 >
                   {name}
