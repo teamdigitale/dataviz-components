@@ -33,6 +33,17 @@
 .mid-table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
+  text-align: left;
+}
+
+.mid-table tbody th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.mid-table tbody td {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
 }
 
 .mid-table tbody tr:hover {

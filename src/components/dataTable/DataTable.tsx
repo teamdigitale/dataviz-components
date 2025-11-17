@@ -103,6 +103,13 @@ export default function DataTable({
                       scope="col"
                       key={`${id ?? ""}-th_${header.id}_${i}`}
                       onClick={header.column.getToggleSortingHandler()}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          header.column.getToggleSortingHandler()?.(e);
+                        }
+                      }}
+                      tabIndex={0}
                       style={{ cursor: "pointer" }}
                       aria-sort={
                         sorted === "asc"
