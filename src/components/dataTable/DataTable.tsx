@@ -1,55 +1,158 @@
 import React from "react";
-import { useHorizontalScrollArrows, useFadePresence } from "./utils";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+  getSortedRowModel,
+  type SortingState,
+} from "@tanstack/react-table";
+import {
+  useHorizontalScrollArrows,
+  useFadePresence,
+  type DataTableProps,
+  defaultFormatNumber,
+  extractHeaderRow,
+  getFirstColumnId,
+  convertMatrixToTableData,
+  createTableColumns,
+  getSortIndicator,
+} from "./utils";
 import ScrollButton from "./ScrollButton";
 import "./dataTable.css";
 
-type DataTableProps = {
-  data: any[];
-  id?: string;
-};
-
-export default function Table({ data, id }: DataTableProps) {
+export default function DataTable({
+  data,
+  id,
+  formatNumber,
+  prefix,
+  suffix,
+  excludeColumnsFromPrefixSuffix,
+  formatValue,
+}: DataTableProps) {
   const { wrapperRef, showLeftArrow, showRightArrow, scrollBy } =
     useHorizontalScrollArrows();
   const leftFade = useFadePresence(showLeftArrow, 180);
   const rightFade = useFadePresence(showRightArrow, 180);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  const hasData = Array.isArray(data) && data.length > 0;
+  const headerRow = React.useMemo(() => extractHeaderRow(data), [data]);
+  const firstColumnId = React.useMemo(
+    () => getFirstColumnId(headerRow),
+    [headerRow]
+  );
+  const format = React.useMemo(
+    () => formatNumber ?? defaultFormatNumber,
+    [formatNumber]
+  );
+
+  const columns = React.useMemo(
+    () =>
+      createTableColumns({
+        headerRow,
+        firstColumnId,
+        format,
+        prefix,
+        suffix,
+        excludeColumnsFromPrefixSuffix,
+        formatValue,
+      }),
+    [
+      headerRow,
+      firstColumnId,
+      format,
+      prefix,
+      suffix,
+      excludeColumnsFromPrefixSuffix,
+      formatValue,
+    ]
+  );
+
+  const tableData = React.useMemo(
+    () => convertMatrixToTableData(data, headerRow),
+    [data, headerRow]
+  );
+
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: { sorting },
+    onSortingChange: setSorting,
+  });
+
+  if (!hasData) {
+    return null;
+  }
 
   return (
     <div className="mid-table-outer">
       <div className="mid-table-wrapper" ref={wrapperRef}>
         <table className="mid-table">
           <thead>
-            <tr>
-              {data[0].map((c: any, i: number) => {
-                if (i === 0) {
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header, i) => {
+                  const sorted = header.column.getIsSorted() as
+                    | "asc"
+                    | "desc"
+                    | false;
                   return (
-                    <th scope="col" key={`${id}-th_` + i}>
-                      {c}
+                    <th
+                      scope="col"
+                      key={`${id ?? ""}-th_${header.id}_${i}`}
+                      onClick={header.column.getToggleSortingHandler()}
+                      style={{ cursor: "pointer" }}
+                      aria-sort={
+                        sorted === "asc"
+                          ? "ascending"
+                          : sorted === "desc"
+                          ? "descending"
+                          : "none"
+                      }
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}{" "}
+                      {getSortIndicator(sorted)}
                     </th>
                   );
-                } else {
-                  return (
-                    <th scope="col" key={`${id}-th_` + i}>
-                      {c}
-                    </th>
-                  );
-                }
-              })}
-            </tr>
+                })}
+              </tr>
+            ))}
           </thead>
           <tbody>
-            {data.slice(1).map((r: any, ii: number) => (
-              <tr key={`${id}-tr_` + ii}>
-                {r.map((v: any, iii: number) => {
-                  if (iii === 0) {
+            {table.getRowModel().rows.map((row) => (
+              <tr key={`${id ?? ""}-tr_${row.id}`}>
+                {row.getVisibleCells().map((cell, index) => {
+                  const isFirstColumn = firstColumnId
+                    ? cell.column.id === firstColumnId
+                    : index === 0;
+                  if (isFirstColumn) {
                     return (
-                      <th scope="row" key={`${id}-r-th_` + iii}>
-                        {v}
+                      <th
+                        scope="row"
+                        key={`${id ?? ""}-r-th_${cell.id}_${index}`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
                       </th>
                     );
-                  } else {
-                    return <td key={`${id}-r-td_` + iii}>{v}</td>;
                   }
+                  return (
+                    <td key={`${id ?? ""}-r-td_${cell.id}_${index}`}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
                 })}
               </tr>
             ))}

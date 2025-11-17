@@ -1,4 +1,133 @@
 import React from "react";
+import type { ColumnDef } from "@tanstack/react-table";
+
+// ============ TYPES ============
+
+export type MatrixType = (string | number)[][];
+
+export type FormatValueContext = {
+  columnId: string;
+  rowIndex: number;
+  colIndex: number;
+  isFirstColumn: boolean;
+};
+
+export type DataTableProps = {
+  data: MatrixType;
+  id?: string;
+  formatNumber?: (n: number) => string;
+  prefix?: string;
+  suffix?: string;
+  excludeColumnsFromPrefixSuffix?: string[];
+  formatValue?: (value: unknown, ctx: FormatValueContext) => React.ReactNode;
+};
+
+// ============ FORMATTING ============
+
+export const defaultFormatNumber = (n: number) =>
+  new Intl.NumberFormat("it-IT").format(n);
+
+// ============ TABLE UTILITIES ============
+
+export function extractHeaderRow(data: MatrixType): (string | number)[] {
+  return Array.isArray(data) && data.length > 0 ? data[0] : [];
+}
+
+export function getFirstColumnId(headerRow: (string | number)[]): string | undefined {
+  return headerRow && headerRow.length > 0 ? String(headerRow[0]) : undefined;
+}
+
+export function convertMatrixToTableData(
+  data: MatrixType,
+  headerRow: (string | number)[]
+): Record<string, unknown>[] {
+  if (!Array.isArray(data) || data.length === 0) return [];
+  const rows = data.slice(1);
+  return rows.map((row) => {
+    const obj: Record<string, unknown> = {};
+    headerRow.forEach((colHeader, idx) => {
+      obj[String(colHeader)] = row[idx];
+    });
+    return obj;
+  });
+}
+
+type CreateColumnsOptions = {
+  headerRow: (string | number)[];
+  firstColumnId: string | undefined;
+  format: (n: number) => string;
+  prefix?: string;
+  suffix?: string;
+  excludeColumnsFromPrefixSuffix?: string[];
+  formatValue?: (value: unknown, ctx: FormatValueContext) => React.ReactNode;
+};
+
+export function createTableColumns(
+  options: CreateColumnsOptions
+): ColumnDef<Record<string, unknown>>[] {
+  const {
+    headerRow,
+    firstColumnId,
+    format,
+    prefix,
+    suffix,
+    excludeColumnsFromPrefixSuffix,
+    formatValue,
+  } = options;
+
+  return headerRow.map((headerCell) => {
+    const key = String(headerCell);
+    return {
+      id: key,
+      accessorKey: key,
+      header: key,
+      cell: (info) => {
+        const value = info.getValue() as unknown;
+        const colIndex = headerRow.findIndex(
+          (h) => String(h) === info.column.id
+        );
+        const isFirstCol = firstColumnId
+          ? info.column.id === firstColumnId
+          : colIndex === 0;
+
+        // Custom formatter takes precedence
+        if (typeof formatValue === "function") {
+          return formatValue(value, {
+            columnId: info.column.id,
+            rowIndex: info.row.index,
+            colIndex,
+            isFirstColumn: isFirstCol,
+          });
+        }
+
+        // Default number formatting with prefix/suffix
+        if (typeof value === "number") {
+          const formatted = format(value as number);
+          const isExcluded =
+            excludeColumnsFromPrefixSuffix &&
+            excludeColumnsFromPrefixSuffix.includes(info.column.id);
+          if (isExcluded) {
+            return formatted;
+          }
+          const prefixStr = prefix ?? "";
+          const suffixStr = suffix ?? "";
+          return `${prefixStr}${formatted}${suffixStr}`;
+        }
+
+        return value as React.ReactNode;
+      },
+    } as ColumnDef<Record<string, unknown>>;
+  });
+}
+
+export function getSortIndicator(sorted: "asc" | "desc" | false): string {
+  if (sorted === "asc") return "▲";
+  if (sorted === "desc") return "▼";
+  return "";
+}
+
+// ============ SCROLL UTILITIES ============
+
 export function computeScrollState(el: HTMLDivElement): {
   canScrollLeft: boolean;
   canScrollRight: boolean;
