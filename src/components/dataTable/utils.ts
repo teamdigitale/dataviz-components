@@ -1,8 +1,6 @@
 import React from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 
-// ============ TYPES ============
-
 export type MatrixType = (string | number)[][];
 
 export type FormatValueContext = {
@@ -22,12 +20,8 @@ export type DataTableProps = {
   formatValue?: (value: unknown, ctx: FormatValueContext) => React.ReactNode;
 };
 
-// ============ FORMATTING ============
-
 export const defaultFormatNumber = (n: number) =>
   new Intl.NumberFormat("it-IT").format(n);
-
-// ============ TABLE UTILITIES ============
 
 export function extractHeaderRow(data: MatrixType): (string | number)[] {
   return Array.isArray(data) && data.length > 0 ? data[0] : [];
@@ -90,7 +84,6 @@ export function createTableColumns(
           ? info.column.id === firstColumnId
           : colIndex === 0;
 
-        // Custom formatter takes precedence
         if (typeof formatValue === "function") {
           return formatValue(value, {
             columnId: info.column.id,
@@ -100,7 +93,6 @@ export function createTableColumns(
           });
         }
 
-        // Default number formatting with prefix/suffix
         if (typeof value === "number") {
           const formatted = format(value as number);
           const isExcluded =
@@ -125,8 +117,6 @@ export function getSortIndicator(sorted: "asc" | "desc" | false): string {
   if (sorted === "desc") return "▼";
   return "";
 }
-
-// ============ SCROLL UTILITIES ============
 
 export function computeScrollState(el: HTMLDivElement): {
   canScrollLeft: boolean;
