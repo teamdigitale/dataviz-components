@@ -2,12 +2,12 @@ import React, { useRef, useEffect, useState } from "react";
 import ReactEcharts, { type EChartsOption } from "echarts-for-react";
 import type { ChartPropsType, FieldDataType } from "../../types";
 import { formatTooltip } from "../../lib/utils";
-import * as echarts from "echarts";
-import italiaDarkTheme from "../../themes/italia-dark";
-import italiaTheme from "../../themes/italia";
+// import * as echarts from "echarts";
+// import italiaDarkTheme from "../../themes/italia-dark";
+// import italiaTheme from "../../themes/italia";
 // register theme object
 // echarts.registerTheme("italiaDark", italiaDarkTheme);
-echarts.registerTheme("italia", italiaTheme);
+// echarts.registerTheme("italia", italiaTheme);
 
 function BasicChart({
 	data,
@@ -171,18 +171,18 @@ function BasicChart({
 		};
 
 		let options = {
-			// backgroundColor: config.background ? config.background : "#F2F7FC",
-			// color: config.colors || [
-			// 	"#5470c6",
-			// 	"#91cc75",
-			// 	"#fac858",
-			// 	"#ee6666",
-			// 	"#73c0de",
-			// 	"#3ba272",
-			// 	"#fc8452",
-			// 	"#9a60b4",
-			// 	"#ea7ccc",
-			// ],
+			backgroundColor: config.background ? config.background : "#F2F7FC",
+			color: config.colors || [
+				"#5470c6",
+				"#91cc75",
+				"#fac858",
+				"#ee6666",
+				"#73c0de",
+				"#3ba272",
+				"#fc8452",
+				"#9a60b4",
+				"#ea7ccc",
+			],
 			...axis,
 			grid,
 			series: data.dataSource?.series?.map((serie: any) => {
@@ -240,7 +240,7 @@ function BasicChart({
 	return (
 		<div style={{ textAlign: "left" }}>
 			<ReactEcharts
-				theme={"italia"}
+				// theme={"italia"}
 				option={getOptions(data) as EChartsOption}
 				ref={refCanvas as any}
 				style={{
