@@ -1,7 +1,7 @@
 import type { ChartConfigType } from "../types";
 
 export function isNumeric(s: string) {
-  /^[+-]?\d+(\.\d+)?$/.test(s);
+  return /^[+-]?\d+(\.\d+)?$/.test(s);
 }
 
 export function log(...args: any) {

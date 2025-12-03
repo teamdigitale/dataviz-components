@@ -1,7 +1,10 @@
 {
-  "name": "dataviz-components",
+  "name": "@teamdigitale/dataviz-components",
   "description": "A simple React component library.",
   "version": "0.2.3",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "keywords": [
     "react",
     "typescript",
@@ -29,6 +32,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
@@ -50,7 +56,14 @@
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-import-css": "^3.5.8",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "@tanstack/react-table": "^8.21.3",
