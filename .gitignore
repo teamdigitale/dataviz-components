@@ -20,3 +20,10 @@ yarn-error.log*
 .vscode/
 .idea/
 *.DS_Store
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# npmrc (may contain tokens)
+.npmrc

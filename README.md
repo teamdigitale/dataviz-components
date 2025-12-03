@@ -1,5 +1,8 @@
 # Dataviz Components
 
+[![codecov](https://codecov.io/gh/teamdigitale/dataviz-components/branch/main/graph/badge.svg)](https://codecov.io/gh/teamdigitale/dataviz-components)
+[![CI](https://github.com/teamdigitale/dataviz-components/actions/workflows/ci.yml/badge.svg)](https://github.com/teamdigitale/dataviz-components/actions/workflows/ci.yml)
+
 This is a react library.
 
 ## Install
